@@ -187,7 +187,7 @@
                 }, 200);
                 
             }else{
-                let rabdnum = Math.floor(Math.random() * 8) + 1;
+                let rabdnum = Math.floor(Math.random() * 7) + 1;
                 context.drawImage(gameflow.gameImages[rabdnum],e.pageX-200,e.pageY-200);
                 setTimeout(function () {
                     context.clearRect(0,0,canvas.width,canvas.height);
