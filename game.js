@@ -14,7 +14,7 @@
         gametimeout,
         timeout,
         timer_text,
-        timer_cnt = 30;
+        timer_cnt = 60;
 
         //creating gameflow object
         function Gameflow() {
@@ -36,8 +36,9 @@
                 winscreen.style.display = 'none';
                 losescreen.style.display = 'none';
                 //setting coin dimensions
-                this.CoinX = (Math.random() * (canvas.width - 60)).toFixed();
-                this.CoinY = (Math.random() * (canvas.height - 60)).toFixed();
+                this.bloackdistance = Math.floor(Math.sqrt((canvas.width/3) * (canvas.height/3))/2);
+                this.CoinX = (Math.random() * (canvas.width - this.bloackdistance)).toFixed();
+                this.CoinY = (Math.random() * (canvas.height - this.bloackdistance)).toFixed();
                 canvas.addEventListener("click",checkcoin,false);
                 this.maxdistance = Math.floor(Math.sqrt(Math.pow(0 - canvas.width-circle/2, 2) + Math.pow(0 - canvas.height-circle/2, 2)));
                 this.gameAudio = new Audio('coin.mp3');
@@ -127,7 +128,7 @@
         //handling mouse move
         function listentomouse(e) {
             distance = calculateDistance(e.pageX,e.pageY);
-            if(distance < 30){
+            if(distance < gameflow.bloackdistance){
                 document.body.style.cursor = 'pointer';
             }else{
                 document.body.style.cursor = 'default';
@@ -177,7 +178,7 @@
         function checkcoin(e) {
             console.log(gameflow)
             distance = calculateDistance(e.pageX,e.pageY);
-            if(distance < 30){
+            if(distance < gameflow.bloackdistance){
                 clearTimeout(gametimeout);
                 clearTimeout(timeout);
                 context.drawImage(gameflow.gameImages[8],0,0);
