@@ -176,6 +176,7 @@
         //finding coin 
         function checkcoin(e) {
             console.log(gameflow)
+            distance = calculateDistance(e.pageX,e.pageY);
             if(distance < 30){
                 clearTimeout(gametimeout);
                 clearTimeout(timeout);
