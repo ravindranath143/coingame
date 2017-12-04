@@ -36,7 +36,7 @@
                 winscreen.style.display = 'none';
                 losescreen.style.display = 'none';
                 //setting coin dimensions
-                this.bloackdistance = Math.floor(Math.sqrt((canvas.width/3) * (canvas.height/3))/2);
+                this.bloackdistance = Math.floor(Math.sqrt((canvas.width/3) * (canvas.height/3))/3);
                 this.CoinX = (Math.random() * (canvas.width - this.bloackdistance)).toFixed();
                 this.CoinY = (Math.random() * (canvas.height - this.bloackdistance)).toFixed();
                 canvas.addEventListener("click",checkcoin,false);
@@ -104,6 +104,7 @@
             gameflow.downloadimage("lose7", "7.-Ghost.png");
             gameflow.downloadimage("lose8", "8.-Cat.png");
             gameflow.downloadimage("win", "Pop-up-min.png");
+            gameflow.downloadimage("timer", "timer-02.png");
             gameflow.DownloadAll();
             getstarted();
         }
@@ -168,10 +169,11 @@
                 gameflow.losescreen_func();
             }
             context.clearRect(0,0,canvas.width,canvas.height);
-            timer_text = "Timer : "+timer_cnt;
+            context.drawImage(gameflow.gameImages[9],17,18,774,264,canvas.width/2, 0,100,50);
+            timer_text = timer_cnt;
             context.font = 'italic 20pt Calibri';
-            context.fillStyle = '#fff';
-            context.fillText(timer_text, canvas.width-150, 30);
+            context.fillStyle = '#000';
+            context.fillText(timer_text, canvas.width/2+40, 33);
             timeout = setTimeout(starttimer, 1000);
         }
         //finding coin 
@@ -193,9 +195,10 @@
                 context.drawImage(gameflow.gameImages[rabdnum],e.pageX-200,e.pageY-200);
                 setTimeout(function () {
                     context.clearRect(0,0,canvas.width,canvas.height);
+                    context.drawImage(gameflow.gameImages[9],17,18,774,264,canvas.width/2, 0,100,50);
                     context.font = 'italic 20pt Calibri';
-                    context.fillStyle = '#fff';
-                    context.fillText(timer_text, canvas.width-150, 30);
+                    context.fillStyle = '#000';
+                    context.fillText(timer_text, canvas.width/2+40, 33);
                 }, 30);
             }
         }
