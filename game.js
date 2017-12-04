@@ -169,7 +169,7 @@
             context.clearRect(0,0,canvas.width,canvas.height);
             timer_text = "Timer : "+timer_cnt;
             context.font = 'italic 20pt Calibri';
-            context.fillStyle = 'blue';
+            context.fillStyle = '#fff';
             context.fillText(timer_text, canvas.width-150, 30);
             timeout = setTimeout(starttimer, 1000);
         }
@@ -193,7 +193,7 @@
                 setTimeout(function () {
                     context.clearRect(0,0,canvas.width,canvas.height);
                     context.font = 'italic 20pt Calibri';
-                    context.fillStyle = 'blue';
+                    context.fillStyle = '#fff';
                     context.fillText(timer_text, canvas.width-150, 30);
                 }, 30);
             }
