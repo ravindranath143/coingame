@@ -2,49 +2,79 @@
 <html>
 <head>
     <title>myntra game</title>
-    <style type="text/css">
-    	* { margin:0; padding:0; } /* to remove the top and left whitespace */
-
-	    html, body { width:100%; height:100%;  background-color: #333; } /* just to be sure these are full screen*/
-
-	   canvas { display:block;}
-       #start_screen{
-       	    width: 30%;
-    		margin: 0 auto;
-       }
-       #startgame{
-       	color: #fff;
-       }
-       #startgame > #head1{
-       	font-size: 25px;
-       }
-       #startgame > #head2{
-       	margin-top: 30%;
-       	font-size: 25px;
-       }
-       #startgame > #play > button{
-       	padding: 10px 15px;
-	    font-size: 16px;
-	    border-radius: 8px;
-	    cursor: pointer;
-       }
-    </style>
+    <link rel="stylesheet" type="text/css" href="css/custom-style.css">
 </head>
 <body>
     <section id="start_screen">
-    	<div id="startgame">
-    		<p id="head1">
-    			Tap & trace your finger around the dark storeroom to find the Mynt-Coin. Double tap when you find it! Beware of the spookies
-    		</p>
-    		<p id="head2">
-    			Make sure you turn your audio on before playing.
-    		</p>
-    		<p id="play"><button id="play_button">Play Now</button></p>
-    	</div>
-	</section>
-    <section id="game_screen"><canvas id="game"></canvas></section>
-    <section id="win_screen"><img src="Win-screen.jpg"></section>
-    <section id="lose_screen"><img src="Lose-screen.jpg"></section>
-    <script src="game.js"></script>
+      <div class="displayScreen">
+        <div class="start-screen">
+          <div class="intro-text">
+            Tap & trace your finger<br>
+            around the dark storeroom to<br>
+            find the Mynt-Coin
+          </div>
+          <div class="audio-alert">
+            Make sure you turn your <br>
+            audio on before playing.
+          </div>
+          <div class="play-button">
+            <button id="play" class="play"></button>
+          </div>
+        </div>
+      </div>
+	 </section>
+
+    <section id="game_screen">
+      <canvas id="game"></canvas>
+    </section>
+
+    <section id="win_screen">
+      <div class="displayScreen">
+        <div class="win-screen">
+          <div class="sreen-text">
+            <h3>YOU FOUNT IT</h3>
+            <div>
+              <img class="myntra-coins" src="img/coin.png">
+            </div>
+            <h1>1000</h1>
+            <div>
+              <button id="play" class="play"></button>
+            </div>
+          </div>
+
+          <div class="play-options">
+            <ul>
+              <li><button>VIEW MORE GAMES</button></li>
+              <li><button>VIEW YOUR MYNT-COINS</button></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="lose_screen">
+      <div class="displayScreen">
+        <div class="lost-screen">
+          <div class="sreen-text">
+            <h3>OH NO! Don't<br>GIVE UP YET!</h3>
+            <div>
+              <img class="myntra-coins" src="img/coin.png">
+            </div>
+            <h1>1000</h1>
+            <div>
+              <button id="play" class="play"></button>
+            </div>
+          </div>
+
+          <div class="play-options">
+            <ul>
+              <li><button>VIEW MORE GAMES</button></li>
+              <li><button>VIEW YOUR MYNT-COINS</button></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+    <script src="js/game.js"></script>
 </body>
 </html>
