@@ -46,6 +46,7 @@
                 this.maxdistance = Math.floor(Math.sqrt(Math.pow(0 - canvas.width-this.blockradius/2, 2) + Math.pow(0 - canvas.height-this.blockradius/2, 2)));
 
                 document.addEventListener('mousemove', M.actions.onMouseMove, false);
+                document.addEventListener('touchmove', M.actions.onTouchMove, false);
                 M.methods.playsound();
                 M.methods.starttimer();
             };
@@ -190,6 +191,9 @@
                         }else{
                             document.body.style.cursor = 'default';
                         }
+                    },
+                    onTouchMove: function(e) {
+                        M.actions.onMouseMove(e);
                     },
                     CanvasClick: function (e) {
                         distance = M.methods.calculateDistance(e.pageX,e.pageY);
