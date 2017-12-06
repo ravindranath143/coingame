@@ -12,6 +12,7 @@
         gametimeout,
         timeout,
         timer_cnt = 60,
+        is_mobile = 0,
         M;
         var t = window.AudioContext || window.webkitAudioContext,
             e = /iPad|iPhone|iPod/.test(navigator.userAgent);
@@ -159,7 +160,6 @@
                         
                     },
                     playsound: function() {
-                        console.log(audio_no)
                         gameflow.gameSounds[audio_no].pause();
                         gameflow.gameSounds[audio_no].currentTime = 0;
                         gameflow.gameSounds[audio_no].play();
@@ -185,7 +185,13 @@
                 },
                 actions:{
                     onMouseMove: function (e) {
-                        distance = M.methods.calculateDistance(e.pageX,e.pageY);
+                        if(is_mobile){
+                            distance = M.methods.calculateDistance(e.touches[0].pageX,e.touches[0].pageY);
+                        }else{
+                            distance = M.methods.calculateDistance(e.pageX,e.pageY);
+                        }
+                        // console.log('dist', is_mobile)
+                        // console.log('radius', gameflow.blockradius)
                         audio_no = (distance/gameflow.blockradius).toFixed()
                         if(distance < gameflow.blockradius){
                             document.body.style.cursor = 'pointer';
@@ -194,6 +200,7 @@
                         }
                     },
                     onTouchMove: function(e) {
+                        is_mobile = !0;
                         M.actions.onMouseMove(e);
                     },
                     CanvasClick: function (e) {
