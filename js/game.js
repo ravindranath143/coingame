@@ -27,6 +27,7 @@
             this.loadedimages = 0;
             this.failedimages = 0;
             this.startscreen_func = function() {
+                startscreen.style.display = 'block';
                 gamescreen.style.display = 'none';
                 winscreen.style.display = 'none';
                 losescreen.style.display = 'none';

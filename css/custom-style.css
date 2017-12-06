@@ -100,6 +100,9 @@ canvas {
     margin:0; 
     padding:0;
 }
+#start_screen,#game_screen,#win_screen,#lose_screen{
+    display:none;
+}
 /*.sreen-text {
     text-align: center;
     margin-top: 18%;
