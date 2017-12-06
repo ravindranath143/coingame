@@ -89,6 +89,7 @@
             {   
                 var gameaudio = new Audio();
                 gameaudio.addEventListener('canplaythrough', function () {
+                    console.log(this)
                     _self.gameSounds.push(this);
                 }, false);
                 gameaudio.src = this.downloadQueueaudio[i][1];
