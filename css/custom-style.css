@@ -1,26 +1,26 @@
 body{
 margin: 0 auto;
     padding: 0;
-    background-color: #160910;
+    background-color: black;
     width: 100%;
     height: 100%;
 }
 .lost-screen{
-background: url(../img/lose-screen.jpg) no-repeat;
+background: url(../img/lose-screen.jpg) no-repeat #565656;
     background-size: contain;
     height: 100%;
     background-position: 50% 50%;
     position: relative;
 }
 .win-screen{
-background: url(../img/win-screen.png) no-repeat;
+background: url(../img/win-screen.png) no-repeat #7e2f52;
     background-size: contain;
     height: 100%;
     background-position: 50% 50%;
     position: relative;
 }
 .start-screen{
-    background: url(../img/coach-mark.png) no-repeat;
+    background: url(../img/coach-mark.png) no-repeat #160a0f;
     background-size: contain;
     height: 100%;
     background-position: 50% 50%;
@@ -108,6 +108,9 @@ canvas {
 @media screen and (min-device-width: 250px) and (max-device-width: 768px) {
      .displayScreen{
         width: 100% !important;
+        height: 100vh;
+    }
+    .start-screen{
         height: 100vh;
     }
  }
