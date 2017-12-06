@@ -202,7 +202,6 @@
                         M.actions.onMouseMove(e);
                     },
                     CanvasClick: function (e) {
-                        alert('click', e)
                         // distance = M.methods.calculateDistance(e.pageX,e.pageY);
                         if(distance < gameflow.blockradius){
                             clearTimeout(gametimeout);
