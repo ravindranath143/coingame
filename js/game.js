@@ -190,9 +190,10 @@
                         // }else{
                         //     distance = M.methods.calculateDistance(e.pageX,e.pageY);
                         // }
+                        distance = 120;
                         // console.log('dist', is_mobile)
                         // console.log('radius', gameflow.blockradius)
-                        audio_no = 3
+                        audio_no = (distance/gameflow.blockradius).toFixed()
                         if(distance < gameflow.blockradius){
                             document.body.style.cursor = 'pointer';
                         }else{
