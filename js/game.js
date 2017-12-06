@@ -46,6 +46,7 @@
                 this.maxdistance = Math.floor(Math.sqrt(Math.pow(0 - canvas.width-this.blockradius/2, 2) + Math.pow(0 - canvas.height-this.blockradius/2, 2)));
 
                 document.addEventListener('mousemove', M.actions.onMouseMove, false);
+                document.addEventListener('touchmove', M.actions.onTouchMove, false);
                 M.methods.playsound();
                 M.methods.starttimer();
             };
@@ -158,6 +159,7 @@
                         
                     },
                     playsound: function() {
+                        console.log(audio_no)
                         gameflow.gameSounds[audio_no].pause();
                         gameflow.gameSounds[audio_no].currentTime = 0;
                         gameflow.gameSounds[audio_no].play();
@@ -190,6 +192,9 @@
                         }else{
                             document.body.style.cursor = 'default';
                         }
+                    },
+                    onTouchMove: function(e) {
+                        M.actions.onMouseMove(e);
                     },
                     CanvasClick: function (e) {
                         distance = M.methods.calculateDistance(e.pageX,e.pageY);
