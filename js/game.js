@@ -185,7 +185,6 @@
                 },
                 actions:{
                     onMouseMove: function (e) {
-                        
                         if(e.type == 'touchmove'){
                             distance = M.methods.calculateDistance(e.touches[0].pageX,e.touches[0].pageY);
                         }else{
@@ -194,6 +193,7 @@
                         // console.log('dist', is_mobile)
                         // console.log('radius', gameflow.blockradius)
                         audio_no = (distance/gameflow.blockradius).toFixed()
+                        alert(audio_no)
                         if(distance < gameflow.blockradius){
                             document.body.style.cursor = 'pointer';
                         }else{
