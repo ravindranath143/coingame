@@ -159,6 +159,7 @@
                         
                     },
                     playsound: function() {
+                        console.log(audio_no)
                         gameflow.gameSounds[audio_no].pause();
                         gameflow.gameSounds[audio_no].currentTime = 0;
                         gameflow.gameSounds[audio_no].play();
