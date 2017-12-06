@@ -2,64 +2,117 @@
 <html>
 <head>
     <title></title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
 </head>
 <body>
     <audio id="player"></audio>
-
+    <p onclick="start()">fkj</p>
 <script type="text/javascript">
-    var audioFiles = [
-    "http://www.teanglann.ie/CanC/nua.mp3",
-    "http://www.teanglann.ie/CanC/ag.mp3",
-    "http://www.teanglann.ie/CanC/dul.mp3",
-    "http://www.teanglann.ie/CanC/freisin.mp3"
-];
-    
-function preloadAudio(url) {
-    var audio = new Audio();
-    // once this file loads, it will call loadedAudio()
-    // the file will be kept by the browser as cache
-    audio.addEventListener('canplaythrough', loadedAudio, false);
-    audio.src = url;
-}
-    
-var loaded = 0;
-function loadedAudio() {
-    // this will be called every time an audio file is loaded
-    // we keep track of the loaded files vs the requested files
-    loaded++;
-    if (loaded == audioFiles.length){
-        // all have loaded
-        init();
+    var $body = $('body').css('display', 'none');
+
+$(document).ready(function () {
+
+    var player = new Audio();
+
+    // canplaythrough event is fired when enough of the audio has downloaded
+    // to play it through at the current download rate
+    player.addEventListener('canplaythrough', function () {
+        sound.push(this);
+        playsound()
+    });
+
+    var sound = [];
+    function audioLoadedHandler(e) {
+
+        // Audio has loaded, show the page
+        $body.css('display', 'block');
+        // And start the audio
+        sound.push(e);
+        console.log(e)
+        playsound();
+    }       
+
+    player.src = '../sounds/10.mp3';
+
+    function playsound(){
+        // console.log(sound[0])
+        // sound[0].play();
+        // gametimeout = setTimeout(playsound, 300);
+        
     }
-}
+
+    function loadAudio(url){
+        // var audio = new Audio();
+        // audio.src = url;
+        // audio.preload = "auto";
+        var n = document.createElement("audio"),
+        $(audio).on("loadeddata", start);  // jQuery checking
+        return audio;
+      }
+       
+        var snd1 = loadAudio("../sounds/10.mp3");
+
+// this is your first function you want to start after audio is preloaded:
+  function start(){
+    console.log(this)
+     snd1.play();  // this is how you play sounds
+  }
+
+});
+//     var audioFiles = [
+//     "http://www.teanglann.ie/CanC/nua.mp3",
+//     "http://www.teanglann.ie/CanC/ag.mp3",
+//     "http://www.teanglann.ie/CanC/dul.mp3",
+//     "http://www.teanglann.ie/CanC/freisin.mp3"
+// ];
     
-var player = document.getElementById('player');
-function play(index) {
-    player.src = audioFiles[index];
-    player.play();
-}
+// function preloadAudio(url) {
+//     var audio = new Audio();
+//     // once this file loads, it will call loadedAudio()
+//     // the file will be kept by the browser as cache
+//     audio.addEventListener('canplaythrough', loadedAudio, false);
+//     audio.src = url;
+// }
     
-function init() {
-    // do your stuff here, audio has been loaded
-    // for example, play all files one after the other
-    var i = 0;
-    // once the player ends, play the next one
-    player.onended = function() {
-        i++;
-        if (i >= audioFiles.length) {
-            // end 
-            return;
-        }
-        play(i);
-    };
-    // play the first file
-    play(i);
-}
+// var loaded = 0;
+// function loadedAudio() {
+//     // this will be called every time an audio file is loaded
+//     // we keep track of the loaded files vs the requested files
+//     loaded++;
+//     if (loaded == audioFiles.length){
+//         // all have loaded
+//         init();
+//     }
+// }
     
-// we start preloading all the audio files
-for (var i in audioFiles) {
-    preloadAudio(audioFiles[i]);
-}
+// var player = document.getElementById('player');
+// function play(index) {
+//     player.src = audioFiles[index];
+//     player.play();
+// }
+    
+// function init() {
+//     // do your stuff here, audio has been loaded
+//     // for example, play all files one after the other
+//     var i = 0;
+//     // once the player ends, play the next one
+//     player.onended = function() {
+//         i++;
+//         if (i >= audioFiles.length) {
+//             // end 
+//             return;
+//         }
+//         play(i);
+//     };
+//     // play the first file
+//     play(i);
+// }
+    
+// // we start preloading all the audio files
+// for (var i in audioFiles) {
+//     preloadAudio(audioFiles[i]);
+// }
 </script>
 </body>
 </html>

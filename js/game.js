@@ -47,7 +47,7 @@
                 this.maxdistance = Math.floor(Math.sqrt(Math.pow(0 - canvas.width-this.blockradius/2, 2) + Math.pow(0 - canvas.height-this.blockradius/2, 2)));
 
                 document.addEventListener('mousemove', M.actions.onMouseMove, false);
-                document.addEventListener('touchmove', M.actions.onTouchMove, false);
+                // document.addEventListener('touchmove', M.actions.onTouchMove, false);
                 M.methods.playsound();
                 M.methods.starttimer();
             };
@@ -88,12 +88,10 @@
             for (var i = 0; i < this.downloadQueueaudio.length; i++) 
             {   
                 var gameaudio = new Audio();
-                gameaudio.addEventListener('canplaythrough', function () {
-                    console.log(this)
-                    _self.gameSounds.push(this);
-                }, false);
                 gameaudio.src = this.downloadQueueaudio[i][1];
-                // this.gameSounds[this.downloadQueueaudio[i][0]] = gameaudio;
+                gameaudio.autobuffer = true;
+                gameaudio.load();
+                this.gameSounds[this.downloadQueueaudio[i][0]] = gameaudio;
             }
         };
         Gameflow.prototype.downloadimage = function(name,path) {
@@ -187,11 +185,11 @@
                 },
                 actions:{
                     onMouseMove: function (e) {
-                        if(e.type == 'touchmove'){
-                            distance = M.methods.calculateDistance(e.touches[0].pageX,e.touches[0].pageY);
-                        }else{
+                        // if(e.type == 'touchmove'){
+                        //     distance = M.methods.calculateDistance(e.touches[0].pageX,e.touches[0].pageY);
+                        // }else{
                             distance = M.methods.calculateDistance(e.pageX,e.pageY);
-                        }
+                        // }
                         audio_no = (distance/gameflow.blockradius).toFixed()
                         if(distance < gameflow.blockradius){
                             document.body.style.cursor = 'pointer';
@@ -199,11 +197,11 @@
                             document.body.style.cursor = 'default';
                         }
                     },
-                    onTouchMove: function(e) {
-                        M.actions.onMouseMove(e);
-                    },
+                    // onTouchMove: function(e) {
+                    //     M.actions.onMouseMove(e);
+                    // },
                     CanvasClick: function (e) {
-                        // distance = M.methods.calculateDistance(e.pageX,e.pageY);
+                        distance = M.methods.calculateDistance(e.pageX,e.pageY);
                         if(distance < gameflow.blockradius){
                             clearTimeout(gametimeout);
                             clearTimeout(timeout);
