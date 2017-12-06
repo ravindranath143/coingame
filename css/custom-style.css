@@ -1,7 +1,7 @@
 body{
 margin: 0 auto;
     padding: 0;
-    background-color: #333;
+    background-color: #160910;
     width: 100%;
     height: 100%;
 }
@@ -102,6 +102,23 @@ canvas {
 }
 #start_screen,#game_screen,#win_screen,#lose_screen{
     display:none;
+}
+
+
+@media screen and (min-device-width: 250px) and (max-device-width: 768px) {
+     .displayScreen{
+        width: 100% !important;
+        height: 100vh;
+    }
+ }
+
+@media   (max-width:768px) {
+   .displayScreen{
+        width: 100% !important;
+        height: 100vh;
+    }
+
+
 }
 /*.sreen-text {
     text-align: center;
