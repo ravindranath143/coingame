@@ -88,10 +88,11 @@
             for (var i = 0; i < this.downloadQueueaudio.length; i++) 
             {   
                 var gameaudio = new Audio();
+                gameaudio.addEventListener('canplaythrough', function () {
+                    _self.gameSounds.push(this);
+                }, false);
                 gameaudio.src = this.downloadQueueaudio[i][1];
-                gameaudio.autobuffer = true;
-                gameaudio.load();
-                this.gameSounds[this.downloadQueueaudio[i][0]] = gameaudio;
+                // this.gameSounds[this.downloadQueueaudio[i][0]] = gameaudio;
             }
         };
         Gameflow.prototype.downloadimage = function(name,path) {
@@ -185,14 +186,11 @@
                 },
                 actions:{
                     onMouseMove: function (e) {
-                        // if(e.type == 'touchmove'){
-                        //     distance = M.methods.calculateDistance(e.touches[0].pageX,e.touches[0].pageY);
-                        // }else{
-                        //     distance = M.methods.calculateDistance(e.pageX,e.pageY);
-                        // }
-                        distance = 120;
-                        // console.log('dist', is_mobile)
-                        // console.log('radius', gameflow.blockradius)
+                        if(e.type == 'touchmove'){
+                            distance = M.methods.calculateDistance(e.touches[0].pageX,e.touches[0].pageY);
+                        }else{
+                            distance = M.methods.calculateDistance(e.pageX,e.pageY);
+                        }
                         audio_no = (distance/gameflow.blockradius).toFixed()
                         if(distance < gameflow.blockradius){
                             document.body.style.cursor = 'pointer';
@@ -201,12 +199,10 @@
                         }
                     },
                     onTouchMove: function(e) {
-                        // alert('touch', e)
-                        // is_mobile = !0;
                         M.actions.onMouseMove(e);
                     },
                     CanvasClick: function (e) {
-                        // alert('click', e)
+                        alert('click', e)
                         // distance = M.methods.calculateDistance(e.pageX,e.pageY);
                         if(distance < gameflow.blockradius){
                             clearTimeout(gametimeout);
