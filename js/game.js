@@ -185,19 +185,19 @@
                 },
                 actions:{
                     onMouseMove: function (e) {
-                        if(e.type == 'touchmove'){
-                            distance = M.methods.calculateDistance(e.touches[0].pageX,e.touches[0].pageY);
-                        }else{
-                            distance = M.methods.calculateDistance(e.pageX,e.pageY);
-                        }
+                        // if(e.type == 'touchmove'){
+                        //     distance = M.methods.calculateDistance(e.touches[0].pageX,e.touches[0].pageY);
+                        // }else{
+                        //     distance = M.methods.calculateDistance(e.pageX,e.pageY);
+                        // }
                         // console.log('dist', is_mobile)
                         // console.log('radius', gameflow.blockradius)
-                        audio_no = (distance/gameflow.blockradius).toFixed()
-                        // if(distance < gameflow.blockradius){
-                        //     document.body.style.cursor = 'pointer';
-                        // }else{
-                        //     document.body.style.cursor = 'default';
-                        // }
+                        audio_no = 3
+                        if(distance < gameflow.blockradius){
+                            document.body.style.cursor = 'pointer';
+                        }else{
+                            document.body.style.cursor = 'default';
+                        }
                     },
                     onTouchMove: function(e) {
                         // alert('touch', e)
