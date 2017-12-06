@@ -200,12 +200,12 @@
                         // }
                     },
                     onTouchMove: function(e) {
-                        alert('touch', e)
+                        // alert('touch', e)
                         // is_mobile = !0;
                         M.actions.onMouseMove(e);
                     },
                     CanvasClick: function (e) {
-                        alert('click', e)
+                        // alert('click', e)
                         // distance = M.methods.calculateDistance(e.pageX,e.pageY);
                         if(distance < gameflow.blockradius){
                             clearTimeout(gametimeout);
