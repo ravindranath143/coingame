@@ -193,12 +193,11 @@
                         // console.log('dist', is_mobile)
                         // console.log('radius', gameflow.blockradius)
                         audio_no = (distance/gameflow.blockradius).toFixed()
-                        alert(audio_no)
-                        if(distance < gameflow.blockradius){
-                            document.body.style.cursor = 'pointer';
-                        }else{
-                            document.body.style.cursor = 'default';
-                        }
+                        // if(distance < gameflow.blockradius){
+                        //     document.body.style.cursor = 'pointer';
+                        // }else{
+                        //     document.body.style.cursor = 'default';
+                        // }
                     },
                     onTouchMove: function(e) {
                         alert('touch', e)
