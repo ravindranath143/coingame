@@ -204,11 +204,11 @@
                     gametimeout = setTimeout(M.playsound, 300);
                 },
                 startsound: function(e) {
-                    console.log(e)
-                    M.playsound();
+                    sterttimeout = setTimeout(M.playsound, 300);
+                    // M.playsound();
                 },
                 stopsound: function(e) {
-                    console.log(e)
+                    clearTimeout(sterttimeout);
                     clearTimeout(gametimeout);
                 },
                 calculateDistance: function (mouseX, mouseY) {
