@@ -40,6 +40,7 @@
             this.gamescreen_func = function() {
                 startscreen.style.display = 'none';
                 gamescreen.style.display = 'block';
+                gamescreen.style.webkitOverflowScrolling = 'auto';
                 winscreen.style.display = 'none';
                 losescreen.style.display = 'none';
                 timer_cnt = 60;
