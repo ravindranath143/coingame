@@ -15,6 +15,7 @@
         is_mobile = 0,
         audiocontext,
         audioBuffer,
+        is_touch = 0,
         M;
         //creating gameflow object
         function Gameflow() {
@@ -198,12 +199,17 @@
                     gametimeout = setTimeout(M.playsound, 300);
                 },
                 startsound: function(e) {
-                    distance = M.calculateDistance(e.touches[0].pageX,e.touches[0].pageY);
-                    audio_no = (distance/gameflow.blockradius).toFixed();
-                    sterttimeout = setTimeout(M.playsound, 300);
+                    if(!is_touch){
+                        is_touch = !is_touch;
+                        distance = M.calculateDistance(e.touches[0].pageX,e.touches[0].pageY);
+                        audio_no = (distance/gameflow.blockradius).toFixed();
+                        sterttimeout = setTimeout(M.playsound, 300);
+                    } 
+                    
                     // M.playsound();
                 },
                 stopsound: function(e) {
+                    is_touch = !is_touch;
                     clearTimeout(sterttimeout);
                     clearTimeout(gametimeout);
                 },
