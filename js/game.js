@@ -49,15 +49,12 @@
                 this.CoinY = (Math.random() * (canvas.height - this.blockradius)).toFixed();
                 canvas.addEventListener("click",M.CanvasClick,false);
                 
-
                 this.maxdistance = Math.floor(Math.sqrt(Math.pow(0 - canvas.width-this.blockradius/2, 2) + Math.pow(0 - canvas.height-this.blockradius/2, 2)));
                 if( is_mobile) {
-                    console.log('mobile')
                     document.addEventListener('touchstart', M.startsound, false);
                     document.addEventListener('touchend', M.stopsound, false);
                     document.addEventListener('touchmove', M.onTouchMove, false);
                 }else{
-                    console.log('desktop')
                     document.addEventListener('mousemove', M.onMouseMove, false);
                     M.playsound();
                 }
@@ -100,7 +97,6 @@
             for (var i = 0; i < this.downloadQueueaudio.length; i++) 
             {   (function (i){
                     xhr[i] = new XMLHttpRequest();
-                    // console.log(this.downloadQueueaudio[i][1])
                     xhr[i].open("GET",gameflow.downloadQueueaudio[i][1],true);
                     xhr[i].responseType= 'arraybuffer';
                     xhr[i].number = 3;
@@ -123,7 +119,6 @@
         Gameflow.prototype.downloadaudio = function(key,path) {
             this.downloadQueueaudio.push([key,path]);
         };
-        console.log(gameflow)
         //all methods and events
         M = {
                 loadhanler : function () {
@@ -193,7 +188,6 @@
                     
                 },
                 playsound: function() {
-                    console.log('play')
                     //creating source node
                     var source = audiocontext.createBufferSource();
                     //passing in file
@@ -205,8 +199,7 @@
                 },
                 startsound: function(e) {
                     distance = M.calculateDistance(e.touches[0].pageX,e.touches[0].pageY);
-                    audio_no = (distance/gameflow.blockradius).toFixed()
-                    console.log(distance)
+                    audio_no = (distance/gameflow.blockradius).toFixed();
                     sterttimeout = setTimeout(M.playsound, 300);
                     // M.playsound();
                 },
@@ -223,12 +216,10 @@
                         clearTimeout(gametimeout);
                         clearTimeout(timeout);
                         if( is_mobile) {
-                            console.log('mobile')
                             document.removeEventListener('touchstart', M.startsound, false);
                             document.removeEventListener('touchend', M.stopsound, false);
                             document.removeEventListener('touchmove', M.onTouchMove, false);
                         }else{
-                            console.log('desktop')
                             document.removeEventListener('mousemove', M.onMouseMove, false);
                         }
                         gameflow.losescreen_func();
@@ -257,7 +248,6 @@
                     M.onMouseMove(e);
                 },
                 CanvasClick: function (e) {
-                    console.log(e)
                     distance = M.calculateDistance(e.pageX,e.pageY);
                     if(distance < gameflow.blockradius){
                         clearTimeout(gametimeout);
@@ -265,12 +255,10 @@
                         context.drawImage(gameflow.gameImages[8],0,0);
                         canvas.removeEventListener("click",M.CanvasClick,false);
                         if( is_mobile) {
-                            console.log('mobile')
                             document.removeEventListener('touchstart', M.startsound, false);
                             document.removeEventListener('touchend', M.stopsound, false);
                             document.removeEventListener('touchmove', M.onTouchMove, false);
                         }else{
-                            console.log('desktop')
                             document.removeEventListener('mousemove', M.onMouseMove, false);
                         }
                         setTimeout(function () {
