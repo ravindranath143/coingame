@@ -13,6 +13,8 @@
         timeout,
         timer_cnt = 60,
         is_mobile = 0,
+        audiocontext,
+        audioBuffer,
         M;
         var t = window.AudioContext || window.webkitAudioContext,
             e = /iPad|iPhone|iPod/.test(navigator.userAgent);
@@ -84,17 +86,35 @@
             }
         };
         Gameflow.prototype.DownloadAllaudio = function() {
-            var _self = this;
+            // var _self = this;
+            // for (var i = 0; i < this.downloadQueueaudio.length; i++) 
+            // {   
+            //     var gameaudio = new Audio();
+            //     gameaudio.src = this.downloadQueueaudio[i][1];
+            //     gameaudio.autobuffer = true;
+            //     gameaudio.load();
+            //     this.gameSounds[this.downloadQueueaudio[i][0]] = gameaudio;
+            // }
+            var xhr = [];
             for (var i = 0; i < this.downloadQueueaudio.length; i++) 
-            {   
-                var gameaudio = new Audio();
-                gameaudio.addEventListener('canplaythrough', function () {
-                    console.log(this)
-                    _self.gameSounds.push(this);
-                }, false);
-                gameaudio.src = this.downloadQueueaudio[i][1];
-                // this.gameSounds[this.downloadQueueaudio[i][0]] = gameaudio;
+            {   (function (i){
+                    xhr[i] = new XMLHttpRequest();
+                    // console.log(this.downloadQueueaudio[i][1])
+                    xhr[i].open("GET",gameflow.downloadQueueaudio[i][1],true);
+                    xhr[i].responseType= 'arraybuffer';
+                    xhr[i].number = 3;
+                    xhr[i].onload = function(){
+                        //take the audio from http request and decode it in an audio buffer
+                        audiocontext.decodeAudioData(xhr[i].response, function(buffer){
+                          audioBuffer = buffer;
+                          gameflow.gameSounds[gameflow.downloadQueueaudio[i][0]] = audioBuffer;
+                        });
+
+                    };
+                    xhr[i].send();
+                })(i)
             }
+            
         };
         Gameflow.prototype.downloadimage = function(name,path) {
             this.downloadQueue.push([name,path]);
@@ -102,11 +122,21 @@
         Gameflow.prototype.downloadaudio = function(key,path) {
             this.downloadQueueaudio.push([key,path]);
         };
-
+        console.log(gameflow)
         //all methods and events
         M = {
                 methods:{
                     loadhanler : function () {
+                        try
+                        {
+                            window.AudioContext = window.AudioContext || window.webkitAudioContext;
+                            audiocontext=new AudioContext();
+
+                        }
+                        catch(e)
+                        {
+                            alert("Your browser doesn't support Web Audio API");
+                        }
                         startscreen = document.getElementById('start_screen');
                         gamescreen = document.getElementById('game_screen');
                         winscreen = document.getElementById('win_screen');
@@ -130,21 +160,21 @@
                         gameflow.downloadimage("timer", "img/timer-02.png");
 
                         //loading sounds
-                        gameflow.downloadaudio("14", "sounds/1.mp3");
-                        gameflow.downloadaudio("13", "sounds/1.mp3");
-                        gameflow.downloadaudio("12", "sounds/1.mp3");
-                        gameflow.downloadaudio("11", "sounds/1.mp3");
-                        gameflow.downloadaudio("10", "sounds/1.mp3");
-                        gameflow.downloadaudio("9", "sounds/2.mp3");
-                        gameflow.downloadaudio("8", "sounds/3.mp3");
-                        gameflow.downloadaudio("7", "sounds/4.mp3");
-                        gameflow.downloadaudio("6", "sounds/5.mp3");
-                        gameflow.downloadaudio("5", "sounds/6.mp3");
-                        gameflow.downloadaudio("4", "sounds/7.mp3");
-                        gameflow.downloadaudio("3", "sounds/8.mp3");
-                        gameflow.downloadaudio("2", "sounds/9.mp3");
-                        gameflow.downloadaudio("1", "sounds/10.mp3");
-                        gameflow.downloadaudio("0", "sounds/10.mp3");
+                        gameflow.downloadaudio("14", "/sounds/1.mp3");
+                        gameflow.downloadaudio("13", "/sounds/1.mp3");
+                        gameflow.downloadaudio("12", "/sounds/1.mp3");
+                        gameflow.downloadaudio("11", "/sounds/1.mp3");
+                        gameflow.downloadaudio("10", "/sounds/1.mp3");
+                        gameflow.downloadaudio("9", "/sounds/2.mp3");
+                        gameflow.downloadaudio("8", "/sounds/3.mp3");
+                        gameflow.downloadaudio("7", "/sounds/4.mp3");
+                        gameflow.downloadaudio("6", "/sounds/5.mp3");
+                        gameflow.downloadaudio("5", "/sounds/6.mp3");
+                        gameflow.downloadaudio("4", "/sounds/7.mp3");
+                        gameflow.downloadaudio("3", "/sounds/8.mp3");
+                        gameflow.downloadaudio("2", "/sounds/9.mp3");
+                        gameflow.downloadaudio("1", "/sounds/10.mp3");
+                        gameflow.downloadaudio("0", "/sounds/10.mp3");
 
                         gameflow.DownloadAll();
                         gameflow.DownloadAllaudio();
@@ -162,9 +192,17 @@
                         
                     },
                     playsound: function() {
-                        gameflow.gameSounds[audio_no].pause();
-                        gameflow.gameSounds[audio_no].currentTime = 0;
-                        gameflow.gameSounds[audio_no].play();
+                        //creating source node
+                        var source = audiocontext.createBufferSource();
+                        //passing in file
+                        source.buffer = gameflow.gameSounds[audio_no];
+
+                        //start playing
+                        source.connect(audiocontext.destination);  // added
+                        source.start(0);
+                        // gameflow.gameSounds[audio_no].pause();
+                        // gameflow.gameSounds[audio_no].currentTime = 0;
+                        // gameflow.gameSounds[audio_no].play();
                         gametimeout = setTimeout(M.methods.playsound, 300);
                     },
                     calculateDistance: function (mouseX, mouseY) {
@@ -203,7 +241,7 @@
                         M.actions.onMouseMove(e);
                     },
                     CanvasClick: function (e) {
-                        // distance = M.methods.calculateDistance(e.pageX,e.pageY);
+                        distance = M.methods.calculateDistance(e.pageX,e.pageY);
                         if(distance < gameflow.blockradius){
                             clearTimeout(gametimeout);
                             clearTimeout(timeout);
