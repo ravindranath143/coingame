@@ -1,26 +1,27 @@
 body{
 margin: 0 auto;
     padding: 0;
-    background-color: black;
+    background-color: white;
     width: 100%;
     height: 100%;
 }
 .lost-screen{
-background: url(../img/lose-screen.jpg) no-repeat #565656;
+background: url(../img/lose-screen.jpg) no-repeat;
     background-size: contain;
     height: 100%;
     background-position: 50% 50%;
     position: relative;
 }
 .win-screen{
-background: url(../img/win-screen.png) no-repeat #7e2f52;
+background: url(../img/win-screen.png) no-repeat ;
     background-size: contain;
     height: 100%;
     background-position: 50% 50%;
     position: relative;
 }
+/* #150a10 */
 .start-screen{
-    background: url(../img/coach-mark.png) no-repeat #160a0f;
+    background: url(../img/coach-mark.png) no-repeat #150a10;
     background-size: contain;
     height: 100%;
     background-position: 50% 50%;
@@ -105,16 +106,89 @@ canvas {
 }
 
 
-@media screen and (min-device-width: 250px) and (max-device-width: 768px) {
+@media screen and (min-device-width: 250px) and (max-device-width: 768px){
+    .displayScreen {
+    height: 100%;
+    margin: 0 auto;
+    width: 100%;
+}
+.start-screen {
+
+    height: -webkit-fill-available;
+    background-position: initial;
+
+}
+.intro-text {
+    font-size: 18px;
+    padding-top: 110px;
+    line-height: 24px;
+}
+.audio-alert {
+    line-height: 23px;
+    font-size: 18px;
+    padding-top: 136px;
+}
+button#play {
+    margin-top: 24px;
+}
+}
+
+
+@media screen and (min-device-width: 321px) and (max-device-width:378px){
+ .intro-text {
+   
+    padding-top: 159px;
+    
+}
+}
+@media screen and (min-device-width: 321px) and (max-device-width:361px){
+.intro-text {
+    padding-top: 152px;
+}
+}
+
+@media screen and (min-device-width: 379px) and (max-device-width:456px){
+    .intro-text {
+    font-size: 20px;
+    padding-top: 160px;
+    
+}
+
+.audio-alert {
+
+    padding-top: 172px;
+}
+}
+@media screen and (min-device-width: 426px) and (max-device-width: 769px){
+    .start-screen {
+    height: -webkit-fill-available;
+    background-position: top;
+}
+.intro-text {
+    
+    padding-top: 170px;
+   
+}
+.audio-alert {
+    line-height: 23px;
+    font-size: 18px;
+    padding-top: 160px;
+}
+}
+
+
+
+
+/*@media screen and (min-device-width: 250px) and (max-device-width: 768px) {
      .displayScreen{
         width: 100% !important;
-        height: 100vh;
+        
     }
-    .start-screen{
+    /*.start-screen{
         height: 100vh;
-    }
+    }*/
  }
- @media screen and (min-device-width: 300px) and (max-device-width: 321px){
+ /*@media screen and (min-device-width: 300px) and (max-device-width: 321px){
     .sreen-text h3 {
    
     margin-top: -8px;
@@ -139,8 +213,8 @@ canvas {
 .start-screen {
     background-position: inherit;
 }
-}
-@media screen and (min-device-width: 320px) and (max-device-width: 361px){
+}*/
+/*@media screen and (min-device-width: 320px) and (max-device-width: 361px){
     .sreen-text {
     
     padding-top: 190px;
@@ -157,14 +231,20 @@ canvas {
     width: 90%;
 }
 
-
+*/
 
 
 }
-@media screen and (min-device-width: 361px) and (max-device-width: 376px){
+/*@media screen and (min-device-width: 361px) and (max-device-width: 376px){
     .sreen-text h3 {
     font-size: 16px;
     margin-top: 60px;
+}
+.start-screen {
+    background: url(../img/coach-mark.png) no-repeat #160a0f;
+    background-size: contain;
+    background-position: inherit;
+  
 }
 }
 @media screen and (min-device-width: 376px) and (max-device-width: 415px){
@@ -184,16 +264,16 @@ canvas {
     padding-left: 5%;
 }
 }
+*/
 
-
-@media   (max-width:768px) {
+/*@media   (max-width:768px) {
    .displayScreen{
         width: 100% !important;
         height: 100vh;
     }
 
 
-}
+}*/
 /*.sreen-text {
     text-align: center;
     margin-top: 18%;
@@ -210,5 +290,5 @@ img.myntra-coins {
     height: 100vh;
     width: 100%;
     }
-
+*/
 }*/
