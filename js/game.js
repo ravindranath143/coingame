@@ -204,6 +204,9 @@
                     gametimeout = setTimeout(M.playsound, 300);
                 },
                 startsound: function(e) {
+                    distance = M.calculateDistance(e.touches[0].pageX,e.touches[0].pageY);
+                    audio_no = (distance/gameflow.blockradius).toFixed()
+                    console.log(distance)
                     sterttimeout = setTimeout(M.playsound, 300);
                     // M.playsound();
                 },
@@ -251,11 +254,10 @@
                     }
                 },
                 onTouchMove: function(e) {
-                    console.log('calling touch')
                     M.onMouseMove(e);
                 },
                 CanvasClick: function (e) {
-
+                    console.log(e)
                     distance = M.calculateDistance(e.pageX,e.pageY);
                     if(distance < gameflow.blockradius){
                         clearTimeout(gametimeout);
