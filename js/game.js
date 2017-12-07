@@ -245,7 +245,6 @@
                     }
                 },
                 onTouchMove: function(e) {
-                    e.preventDefault();
                     M.onMouseMove(e);
                 },
                 CanvasClick: function (e) {
@@ -269,12 +268,7 @@
                         
                     }else{
                         let rabdnum = Math.floor(Math.random() * 7) + 1;
-                        let pagex = e.pageX, pagey = e.pageY;
-                        if(canvas.width-pagex < 100)
-                            pagex = canvas.width - 100;
-                        if(canvas.height-pagey < 250)
-                            pagey = canvas.height - 250;
-                        context.drawImage(gameflow.gameImages[rabdnum],pagex,pagey);
+                        context.drawImage(gameflow.gameImages[rabdnum],e.pageX-200,e.pageY-200);
                         setTimeout(function () {
                             context.clearRect(0,0,canvas.width,canvas.height);
                             context.drawImage(gameflow.gameImages[9],17,18,774,264,canvas.width/2-50, 30,100,50);

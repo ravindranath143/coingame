@@ -258,6 +258,8 @@ button#play {
     padding-top: 160px;
 }
 }
+touch-action: none;
+
 
 
 
