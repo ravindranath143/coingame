@@ -123,7 +123,23 @@ canvas {
   
     margin-top: 30px;
 }
- }
+.intro-text {
+    font-size: 18px;
+    padding-top: 120px;
+    line-height: 30px;
+}
+.audio-alert {
+    line-height: 28px;
+    font-size: 18px;
+    padding-top: 126px;
+}
+.start-screen button#play {
+    margin-top: 14px;
+}
+.start-screen {
+    background-position: inherit;
+}
+}
 @media screen and (min-device-width: 320px) and (max-device-width: 361px){
     .sreen-text {
     
@@ -140,6 +156,7 @@ canvas {
     padding-left: 5%;
     width: 90%;
 }
+
 
 
 
