@@ -95,23 +95,33 @@
             }
         };
         Gameflow.prototype.DownloadAllaudio = function() {
-            var xhr = [];
+            var _self = this;
             for (var i = 0; i < this.downloadQueueaudio.length; i++) 
-            {   (function (i){
-                    xhr[i] = new XMLHttpRequest();
-                    xhr[i].open("GET",gameflow.downloadQueueaudio[i][1],true);
-                    xhr[i].responseType= 'arraybuffer';
-                    xhr[i].number = 3;
-                    xhr[i].onload = function(){
-                        //take the audio from http request and decode it in an audio buffer
-                        audiocontext.decodeAudioData(xhr[i].response, function(buffer){
-                          audioBuffer = buffer;
-                          gameflow.gameSounds[gameflow.downloadQueueaudio[i][0]] = audioBuffer;
-                        });
-                    };
-                    xhr[i].send();
-                })(i)
+            {   
+                var gameaudio = new Audio();
+                gameaudio.src = this.downloadQueueaudio[i][1];
+                gameaudio.autobuffer = true;
+                gameaudio.load();
+                this.gameSounds[this.downloadQueueaudio[i][0]] = gameaudio;
             }
+
+            // var xhr = [];
+            // for (var i = 0; i < this.downloadQueueaudio.length; i++) 
+            // {   (function (i){
+            //         xhr[i] = new XMLHttpRequest();
+            //         xhr[i].open("GET",gameflow.downloadQueueaudio[i][1],true);
+            //         xhr[i].responseType= 'arraybuffer';
+            //         xhr[i].number = 3;
+            //         xhr[i].onload = function(){
+            //             //take the audio from http request and decode it in an audio buffer
+            //             audiocontext.decodeAudioData(xhr[i].response, function(buffer){
+            //               audioBuffer = buffer;
+            //               gameflow.gameSounds[gameflow.downloadQueueaudio[i][0]] = audioBuffer;
+            //             });
+            //         };
+            //         xhr[i].send();
+            //     })(i)
+            // }
             
         };
         Gameflow.prototype.downloadimage = function(name,path) {
@@ -189,14 +199,19 @@
                     
                 },
                 playsound: function() {
-                    //creating source node
-                    var source = audiocontext.createBufferSource();
-                    //passing in file
-                    source.buffer = gameflow.gameSounds[audio_no];
-                    //start playing
-                    source.connect(audiocontext.destination);  // added
-                    source.start(0);
+                    gameflow.gameSounds[audio_no].pause();
+                    gameflow.gameSounds[audio_no].currentTime = 0;
+                    gameflow.gameSounds[audio_no].play();
                     gametimeout = setTimeout(M.playsound, 300);
+
+                    // //creating source node
+                    // var source = audiocontext.createBufferSource();
+                    // //passing in file
+                    // source.buffer = gameflow.gameSounds[audio_no];
+                    // //start playing
+                    // source.connect(audiocontext.destination);  // added
+                    // source.start(0);
+                    // gametimeout = setTimeout(M.playsound, 300);
                 },
                 startsound: function(e) {
                     if(!is_touch){
