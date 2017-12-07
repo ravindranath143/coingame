@@ -198,14 +198,12 @@
                     gametimeout = setTimeout(M.playsound, 300);
                 },
                 startsound: function(e) {
-                    e.preventDefault();
                     distance = M.calculateDistance(e.touches[0].pageX,e.touches[0].pageY);
                     audio_no = (distance/gameflow.blockradius).toFixed();
                     sterttimeout = setTimeout(M.playsound, 300);
                     // M.playsound();
                 },
                 stopsound: function(e) {
-                    e.preventDefault();
                     clearTimeout(sterttimeout);
                     clearTimeout(gametimeout);
                 },
