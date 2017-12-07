@@ -219,13 +219,22 @@
                     if(timer_cnt == 0){
                         clearTimeout(gametimeout);
                         clearTimeout(timeout);
+                        if( is_mobile) {
+                            console.log('mobile')
+                            document.removeEventListener('touchstart', M.startsound, false);
+                            document.removeEventListener('touchend', M.stopsound, false);
+                            document.removeEventListener('touchmove', M.onTouchMove, false);
+                        }else{
+                            console.log('desktop')
+                            document.removeEventListener('mousemove', M.onMouseMove, false);
+                        }
                         gameflow.losescreen_func();
                     }
                     context.clearRect(0,0,canvas.width,canvas.height);
-                    context.drawImage(gameflow.gameImages[9],17,18,774,264,canvas.width/2, 30,100,50);
+                    context.drawImage(gameflow.gameImages[9],17,18,774,264,canvas.width/2-50, 30,100,50);
                     context.font = 'italic 20pt Calibri';
                     context.fillStyle = '#000';
-                    context.fillText(timer_cnt, canvas.width/2+40, 65);
+                    context.fillText(timer_cnt, canvas.width/2-10, 65);
                     timeout = setTimeout(M.starttimer, 1000);
                 },
                 onMouseMove: function (e) {
@@ -268,15 +277,14 @@
                         }, 200);
                         
                     }else{
-                        console.log('click')
                         let rabdnum = Math.floor(Math.random() * 7) + 1;
                         context.drawImage(gameflow.gameImages[rabdnum],e.pageX-200,e.pageY-200);
                         setTimeout(function () {
                             context.clearRect(0,0,canvas.width,canvas.height);
-                            context.drawImage(gameflow.gameImages[9],17,18,774,264,canvas.width/2, 30,100,50);
+                            context.drawImage(gameflow.gameImages[9],17,18,774,264,canvas.width/2-50, 30,100,50);
                             context.font = 'italic 20pt Calibri';
                             context.fillStyle = '#000';
-                            context.fillText(timer_cnt, canvas.width/2+40, 65);
+                            context.fillText(timer_cnt, canvas.width/2-10, 65);
                         }, 400);
                     }
                 },
