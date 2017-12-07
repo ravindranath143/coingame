@@ -101,6 +101,7 @@ canvas {
     margin:0; 
     padding:0;
     background-color: #6c6c6c;
+    touch-action: none;
 }
 #start_screen,#game_screen,#win_screen,#lose_screen{
     display:none;
@@ -258,8 +259,6 @@ button#play {
     padding-top: 160px;
 }
 }
-touch-action: none;
-
 
 
 
