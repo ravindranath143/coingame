@@ -107,7 +107,6 @@
                           audioBuffer = buffer;
                           gameflow.gameSounds[gameflow.downloadQueueaudio[i][0]] = audioBuffer;
                         });
-
                     };
                     xhr[i].send();
                 })(i)
@@ -199,12 +198,14 @@
                     gametimeout = setTimeout(M.playsound, 300);
                 },
                 startsound: function(e) {
+                    e.preventDefault();
                     distance = M.calculateDistance(e.touches[0].pageX,e.touches[0].pageY);
                     audio_no = (distance/gameflow.blockradius).toFixed();
                     sterttimeout = setTimeout(M.playsound, 300);
                     // M.playsound();
                 },
                 stopsound: function(e) {
+                    e.preventDefault();
                     clearTimeout(sterttimeout);
                     clearTimeout(gametimeout);
                 },
@@ -246,6 +247,7 @@
                     }
                 },
                 onTouchMove: function(e) {
+                    e.preventDefault();
                     M.onMouseMove(e);
                 },
                 CanvasClick: function (e) {
@@ -269,7 +271,12 @@
                         
                     }else{
                         let rabdnum = Math.floor(Math.random() * 7) + 1;
-                        context.drawImage(gameflow.gameImages[rabdnum],e.pageX-200,e.pageY-200);
+                        let pagex = e.pageX, pagey = e.pageY;
+                        if(canvas.width-pagex < 100)
+                            pagex = canvas.width - 100;
+                        if(canvas.height-pagey < 250)
+                            pagey = canvas.height - 250;
+                        context.drawImage(gameflow.gameImages[rabdnum],pagex,pagey);
                         setTimeout(function () {
                             context.clearRect(0,0,canvas.width,canvas.height);
                             context.drawImage(gameflow.gameImages[9],17,18,774,264,canvas.width/2-50, 30,100,50);
