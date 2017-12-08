@@ -268,6 +268,7 @@
                     }else{
                         document.body.style.cursor = 'default';
                     }
+                    e.preventDefault();
                 },
                 onTouchMove: function(e) {
                     M.onMouseMove(e);
