@@ -14,8 +14,6 @@
         timeout,
         timer_cnt = 60,
         is_mobile = 0,
-        audiocontext,
-        audioBuffer,
         is_touch = 0,
         M;
         //creating gameflow object
@@ -108,9 +106,7 @@
                           src: [this.downloadQueueaudio[i][1]]
                         });
                  this.gameSounds[this.downloadQueueaudio[i][0]] = sound;
-            }
-
-            
+            } 
         };
         Gameflow.prototype.downloadimage = function(name,path) {
             this.downloadQueue.push([name,path]);
@@ -122,17 +118,6 @@
         //all methods and events
         M = {
                 loadhanler : function () {
-                    try
-                    {
-                        window.AudioContext = window.AudioContext || window.webkitAudioContext;
-                        audiocontext=new AudioContext();
-
-                    }
-                    catch(e)
-                    {
-                        alert("Your browser doesn't support Web Audio API");
-                    }
-
                     startscreen = document.getElementById('start_screen');
                     gamescreen = document.getElementById('game_screen');
                     winscreen = document.getElementById('win_screen');
@@ -182,7 +167,6 @@
                     for (var i = 0; i < playbutton.length; i++) {
                         playbutton[i].addEventListener("click",M.startgame,false);
                     }
-                    // playbutton.addEventListener("click",M.startgame,false);
                     gameflow.startscreen_func();
                 },
                 startgame: function() {
@@ -190,20 +174,8 @@
                     
                 },
                 playsound: function() {
-                    // gameflow.gameSounds[1].pause();
-                    // gameflow.gameSounds[audio_no].currentTime = 0;
-                    // console.log(audio_no)
                     gameflow.gameSounds[audio_no].play();
                     gametimeout = setTimeout(M.playsound, 300);
-
-                    //creating source node
-                    // var source = audiocontext.createBufferSource();
-                    // //passing in file
-                    // source.buffer = gameflow.gameSounds[audio_no];
-                    // //start playing
-                    // source.connect(audiocontext.destination);  // added
-                    // source.start(0);
-                    // gametimeout = setTimeout(M.playsound, 300);
                 },
                 startsound: function(e) {
                     if(!is_touch){
@@ -258,11 +230,6 @@
                     }
                     audio_no = (distance/gameflow.blockradius).toFixed();
                     console.log('no ',audio_no)
-                    // if(prev_audio_no != audio_no){
-                    //     console.log(prev_audio_no)
-                    //     gameflow.gameSounds[prev_audio_no].pause();
-                    //     prev_audio_no = audio_no;
-                    // }
                     if(distance < gameflow.blockradius){
                         document.body.style.cursor = 'pointer';
                     }else{
