@@ -9,6 +9,7 @@
         context,
         distance=0,
         audio_no = 10,
+        prev_audio_no = 10,
         gametimeout,
         timeout,
         timer_cnt = 60,
@@ -47,8 +48,13 @@
                 timer_cnt = 60;
                 //setting coin dimensions
                 this.blockradius = Math.floor(Math.sqrt((canvas.width/3) * (canvas.height/3))/3);
+                console.log(canvas.width)
+                console.log(canvas.height)
+                console.log(this.blockradius)
                 this.CoinX = (Math.random() * (canvas.width - this.blockradius)).toFixed();
                 this.CoinY = (Math.random() * (canvas.height - this.blockradius)).toFixed();
+                console.log(this.CoinX)
+                console.log(this.CoinY)
                 canvas.addEventListener("click",M.CanvasClick,false);
                 
                 this.maxdistance = Math.floor(Math.sqrt(Math.pow(0 - canvas.width-this.blockradius/2, 2) + Math.pow(0 - canvas.height-this.blockradius/2, 2)));
@@ -76,6 +82,7 @@
             };
         }
         gameflow = new Gameflow();
+
         //adding prototypes
         Gameflow.prototype.DownloadAll = function() {
             var _self = this;
@@ -95,33 +102,14 @@
             }
         };
         Gameflow.prototype.DownloadAllaudio = function() {
-            var _self = this;
             for (var i = 0; i < this.downloadQueueaudio.length; i++) 
             {   
-                var gameaudio = new Audio();
-                gameaudio.src = this.downloadQueueaudio[i][1];
-                gameaudio.autobuffer = true;
-                gameaudio.load();
-                this.gameSounds[this.downloadQueueaudio[i][0]] = gameaudio;
+                let sound = new Howl({
+                          src: [this.downloadQueueaudio[i][1]]
+                        });
+                 this.gameSounds[this.downloadQueueaudio[i][0]] = sound;
             }
 
-            // var xhr = [];
-            // for (var i = 0; i < this.downloadQueueaudio.length; i++) 
-            // {   (function (i){
-            //         xhr[i] = new XMLHttpRequest();
-            //         xhr[i].open("GET",gameflow.downloadQueueaudio[i][1],true);
-            //         xhr[i].responseType= 'arraybuffer';
-            //         xhr[i].number = 3;
-            //         xhr[i].onload = function(){
-            //             //take the audio from http request and decode it in an audio buffer
-            //             audiocontext.decodeAudioData(xhr[i].response, function(buffer){
-            //               audioBuffer = buffer;
-            //               gameflow.gameSounds[gameflow.downloadQueueaudio[i][0]] = audioBuffer;
-            //             });
-            //         };
-            //         xhr[i].send();
-            //     })(i)
-            // }
             
         };
         Gameflow.prototype.downloadimage = function(name,path) {
@@ -130,6 +118,7 @@
         Gameflow.prototype.downloadaudio = function(key,path) {
             this.downloadQueueaudio.push([key,path]);
         };
+        console.log(gameflow)
         //all methods and events
         M = {
                 loadhanler : function () {
@@ -167,6 +156,8 @@
                     gameflow.downloadimage("timer", "img/timer-02.png");
 
                     //loading sounds
+                    gameflow.downloadaudio("16", "/sounds/1.mp3");
+                    gameflow.downloadaudio("15", "/sounds/1.mp3");
                     gameflow.downloadaudio("14", "/sounds/1.mp3");
                     gameflow.downloadaudio("13", "/sounds/1.mp3");
                     gameflow.downloadaudio("12", "/sounds/1.mp3");
@@ -199,12 +190,13 @@
                     
                 },
                 playsound: function() {
-                    gameflow.gameSounds[audio_no].pause();
-                    gameflow.gameSounds[audio_no].currentTime = 0;
+                    // gameflow.gameSounds[1].pause();
+                    // gameflow.gameSounds[audio_no].currentTime = 0;
+                    // console.log(audio_no)
                     gameflow.gameSounds[audio_no].play();
                     gametimeout = setTimeout(M.playsound, 300);
 
-                    // //creating source node
+                    //creating source node
                     // var source = audiocontext.createBufferSource();
                     // //passing in file
                     // source.buffer = gameflow.gameSounds[audio_no];
@@ -218,10 +210,16 @@
                         is_touch = !is_touch;
                         distance = M.calculateDistance(e.touches[0].pageX,e.touches[0].pageY);
                         audio_no = (distance/gameflow.blockradius).toFixed();
+                        if(prev_audio_no != audio_no){
+                            gameflow.gameSounds[prev_audio_no].pause();
+                            prev_audio_no = audio_no;
+                        }
                         sterttimeout = setTimeout(M.playsound, 300);
                     } 
+                    setTimeout(function () {
+                        e.preventDefault();
+                    }, 300);
                     
-                    // M.playsound();
                 },
                 stopsound: function(e) {
                     is_touch = !is_touch;
@@ -258,7 +256,13 @@
                     }else{
                         distance = M.calculateDistance(e.pageX,e.pageY);
                     }
-                    audio_no = (distance/gameflow.blockradius).toFixed()
+                    audio_no = (distance/gameflow.blockradius).toFixed();
+                    console.log('no ',audio_no)
+                    // if(prev_audio_no != audio_no){
+                    //     console.log(prev_audio_no)
+                    //     gameflow.gameSounds[prev_audio_no].pause();
+                    //     prev_audio_no = audio_no;
+                    // }
                     if(distance < gameflow.blockradius){
                         document.body.style.cursor = 'pointer';
                     }else{
