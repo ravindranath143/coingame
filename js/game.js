@@ -15,7 +15,11 @@
         timer_cnt = 60,
         is_mobile = 0,
         is_touch = 0,
-        M;
+        M,
+        progressbar,
+        loadingscreen,
+        barwidth = 10,
+        bartimecout;
         //creating gameflow object
         function Gameflow() {
             this.gameSprites = new Array();
@@ -23,7 +27,7 @@
             this.gameSounds = new Array();
             this.downloadQueue = new Array();
             this.downloadQueueaudio = new Array();
-            this.totalimages = 9;
+            this.totalimages = 10;
             this.loadedimages = 0;
             this.failedimages = 0;
             this.startscreen_func = function() {
@@ -32,6 +36,7 @@
                 }else{
                     is_mobile = 0;
                 }
+                loadingscreen.style.display = 'none';
                 startscreen.style.display = 'block';
                 gamescreen.style.display = 'none';
                 winscreen.style.display = 'none';
@@ -46,13 +51,8 @@
                 timer_cnt = 60;
                 //setting coin dimensions
                 this.blockradius = Math.floor(Math.sqrt((canvas.width/3) * (canvas.height/3))/3);
-                console.log(canvas.width)
-                console.log(canvas.height)
-                console.log(this.blockradius)
                 this.CoinX = (Math.random() * (canvas.width - this.blockradius)).toFixed();
                 this.CoinY = (Math.random() * (canvas.height - this.blockradius)).toFixed();
-                console.log(this.CoinX)
-                console.log(this.CoinY)
                 canvas.addEventListener("click",M.CanvasClick,false);
                 
                 this.maxdistance = Math.floor(Math.sqrt(Math.pow(0 - canvas.width-this.blockradius/2, 2) + Math.pow(0 - canvas.height-this.blockradius/2, 2)));
@@ -118,10 +118,12 @@
         //all methods and events
         M = {
                 loadhanler : function () {
+                    loadingscreen = document.getElementById('loading_screen');
                     startscreen = document.getElementById('start_screen');
                     gamescreen = document.getElementById('game_screen');
                     winscreen = document.getElementById('win_screen');
                     losescreen = document.getElementById('lose_screen');
+                    progressbar = document.getElementById("Progressbar"); 
                     // playbutton = document.getElementById('play');
                     playbutton = document.getElementsByClassName('play');
                     canvas = document.getElementById('game');
@@ -139,6 +141,9 @@
                     gameflow.downloadimage("lose8", "img/8.-Cat.png");
                     gameflow.downloadimage("win", "img/Pop-up-min.png");
                     gameflow.downloadimage("timer", "img/timer-02.png");
+                    // gameflow.downloadimage("win_screen", "img/lose-screen.jpg");
+                    // gameflow.downloadimage("lose_screen", "img/win-screen.png");
+                    // gameflow.downloadimage("coach_mark", "img/coach-mark.png");
 
                     //loading sounds
                     gameflow.downloadaudio("16", "/sounds/1.mp3");
@@ -161,7 +166,19 @@
 
                     gameflow.DownloadAll();
                     gameflow.DownloadAllaudio();
-                    M.getstarted();
+                    M.startafterdownload();
+                },
+                startafterdownload: function () {
+                    if (barwidth >= 100) {
+                      clearTimeout(bartimecout);
+                      M.getstarted();
+                    } else {
+                      barwidth = (gameflow.loadedimages + gameflow.failedimages) * 10; 
+                      progressbar.style.width = barwidth + '%'; 
+                      progressbar.innerHTML = barwidth * 1  + '%';
+                      bartimecout = setTimeout(M.startafterdownload, 10);
+                    }
+                    
                 },
                 getstarted: function () {
                     for (var i = 0; i < playbutton.length; i++) {
