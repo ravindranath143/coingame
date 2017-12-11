@@ -1,79 +1,8 @@
 (function() {
-<<<<<<< HEAD
 
-        var startscreen,gamescreen,winscreen,losescreen,playbutton,gametimeout,timeout;
-
-
-
-        var gamefunc = function(){
-            var loadImage = new Array(); 
-        }
-
-        
-        var canvas = document.getElementById('doorClose');
-        var ctx = canvas.getContext("2d");
-        canvas.width = 489;
-        canvas.height = 650;
-
-        var myTimeout;
-        var Timer = 20;
-        var w = document.innerWidth/2;
-        var h = document.innerHeight/2;
-
-        var timerImage = false;
-        var timer = new Image();
-        timer.onload = function(){
-            timerImage = true;
-        }
-        timer.src = "css/timer.png";
-
-        var buttonImage = false;
-        var button = new Image();
-
-        button.onload = function(){
-            buttonImage = true;
-
-        }
-        button.src = "css/button.png";
-
-
-        var frontimage = false;
-        var front = new Image();
-
-        front.onload = function(){
-            frontimage= true;
-        };
-
-        front.src = "css/door-side.png";
-
-
-        var doorbackimage = false;
-        var backimage = new Image();
-
-        backimage.onload = function() {
-            doorbackimage = true;
-        };
-        backimage.src = "css/crowded.png";
-
-        var doorReady = false;
-        var doorimage1 = new Image();
-
-        doorimage1.onload = function(){
-        	doorReady = true;
-        };
-        doorimage1.src = "css/left_door.png";
-        var doorReady1 = false;
-        var doorimage2 = new Image();
-
-        doorimage2.onload = function(){
-            doorReady1 = true;
-        };
-        doorimage2.src = "css/right_door.png";
-        var Door = {};
-=======
     var game_time = 10,starttimeout,timertimeout,is_loop = 1;
     var Door = {};
->>>>>>> 9910998c7cdd20a08b5689ab63b7b46c34c32aac
+
         Door.x = -40;
         Door.z = 40;
         Door.y = 1;
@@ -136,23 +65,7 @@
                 clearTimeout(starttimeout);
                 game.startgame();
             }
-<<<<<<< HEAD
 
-        };
-        var gameLoop = function() {
-     
-            render();
-            update();
-
-            requestAnimationFrame(gameLoop);
-        };
-        var w = window;
-        requestAnimationFrame = w.requestAnimationFrame || w.webkitRequestAnimationFrame || w.msRequestAnimationFrame || w.mozRequestAnimationFrame;
-
-        gameLoop();
-
-    })();
-=======
             if(is_loop){
                 starttimeout = setTimeout(game.startgame, 10);
             }
@@ -197,4 +110,4 @@
     console.log(game);
     window.addEventListener("load",loadhanler,false);
 })();
->>>>>>> 9910998c7cdd20a08b5689ab63b7b46c34c32aac
+
