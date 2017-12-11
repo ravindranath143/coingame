@@ -1,5 +1,5 @@
 (function() {
-    var game_time = 10,starttimeout,timertimeout,is_loop = 1;
+    var game_time = 10,starttimeout,timertimeout,is_loop = 1,barwidth = 10,bartimecout,gamescreen;
     var Door = {};
         Door.x = -40;
         Door.z = 40;
@@ -91,7 +91,24 @@
         game_time--;
         timertimeout = setTimeout(game.starttimer, 1000);
     };
+    creategame.prototype.startafterdownload = function(name,path) {
+         if (barwidth >= 100) {
+              gamescreen.style.display = 'block';
+              loadingscreen.style.display = 'none';
+              game.startgame();
+              game.starttimer();
+            } else {
+              barwidth = ((game.loadedimages + game.failedimages)/6).toFixed() * 100; 
+              progressbar.style.width = barwidth + '%'; 
+              progressbar.innerHTML = barwidth * 1  + '%';
+              bartimecout = setTimeout(game.startafterdownload, 20);
+            }
+    };
     function loadhanler() {
+        loadingscreen = document.getElementById('loading_screen');
+        progressbar = document.getElementById("Progressbar");
+        gamescreen = document.getElementById("catchwer");
+        gamescreen.style.display = 'none';
         game.downloadimageque("timer", "css/timer.png");
         game.downloadimageque("button", "css/button.png");
         game.downloadimageque("frame", "css/door-side.png");
@@ -100,8 +117,7 @@
         game.downloadimageque("right_door", "css/right_door.png");
         document.addEventListener("click",game.closethedoor,false);
         game.downloadimages();
-        game.startgame();
-        game.starttimer();
+        game.startafterdownload();
 
     }
     console.log(game);
