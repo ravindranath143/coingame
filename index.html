@@ -7,6 +7,17 @@
     <meta name="viewport" content="width=device-width, user-scalable=no" />
 </head>
 <body>
+    <section id="loading_screen">
+      <div id="Progressblock">
+        <div id="Progressbar">10%</div>
+      </div>
+    </section>
+    <div style="display: none;">
+      <audio controls>
+        <source src="sounds/coin-slow.mp3" type="audio/mpeg">
+        Your browser does not support the audio tag.
+      </audio>
+    </div>
     <section id="start_screen">
       <div class="displayScreen">
         <div class="start-screen">
@@ -77,6 +88,7 @@
         </div>
       </div>
     </section>
+    <script src="js/howler.js"></script>
     <script src="js/game.js"></script>
 </body>
 </html>
