@@ -1,4 +1,11 @@
 (function(){
+    var req = new XMLHttpRequest();
+    req.open("GET","https://floating-hollows-29572.herokuapp.com/growth/api/eors18/gamedata?id=1&gameId=invisible_coin",true);
+    req.onload = function(){
+        console.log("jdfhjkd")
+        console.log(req.response);
+    };
+    req.send();
     var startscreen,
         gamescreen,
         winscreen,
