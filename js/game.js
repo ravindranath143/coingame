@@ -30,6 +30,7 @@
                 if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
                     is_mobile = !0;
                 }else{
+                    
                     is_mobile = 0;
                 }
                 startscreen.style.display = 'block';
