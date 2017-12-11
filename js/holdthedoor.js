@@ -5,6 +5,7 @@
         canvas.height = 650;
 
         var myTimeout;
+        var Timer = 20;
         var w = document.innerWidth/2;
         var h = document.innerHeight/2;
 
@@ -72,7 +73,9 @@
                 Door.z =0;
             }
 
+
        	}
+       
         var render = function() {
             // console.log("render");
             if (doorbackimage) {
@@ -95,9 +98,16 @@
             }
             if(timerImage){
                 ctx.drawImage(timer,0,0,821,313,200,0,100,50);
+
             }
+            ctx.fillStyle = "rgb(250, 250, 250)";
+            ctx.font = "24px Helvetica";
+            ctx.textAlign = "left";
+            ctx.textBaseline = "top";
+            ctx.fillText(Timer,235, 10);
             
         };
+
         var update = function() {
         	
         	if(Door.x <0){
@@ -114,11 +124,13 @@
                 Door.x = -160;
                 Door.z = 155;
             }
+            
         };
         var gameLoop = function() {
      
             render();
             update();
+
             requestAnimationFrame(gameLoop);
         };
         var w = window;

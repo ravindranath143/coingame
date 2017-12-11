@@ -135,6 +135,14 @@ canvas {
     margin: 0 auto;
     width: 100%;
 }
+.catchwer {
+    width: 100%;
+    margin: auto;
+}
+canvas {
+    width: 100% !important;
+    height: 100%;
+}
 .start-screen {
 
     height: -webkit-fill-available;
