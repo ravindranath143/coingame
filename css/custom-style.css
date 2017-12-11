@@ -5,12 +5,11 @@ margin: 0 auto;
     width: 100%;
     height: 100%;
 }
-<<<<<<< HEAD
-
 .catchwer {
     width: 490px;
     margin: auto;
-=======
+}
+
 #Progressblock {
   width: 50%;
   margin: 0 auto;
@@ -25,7 +24,7 @@ margin: 0 auto;
   text-align: center;
   line-height: 30px;
   color: white;
->>>>>>> 4600c1e634ebf46beb34b77a28a21607a0aecfbc
+
 }
 .lost-screen{
 background: url(../img/lose-screen.jpg) no-repeat #5a5a5a;
