@@ -1,4 +1,14 @@
 (function() {
+
+        var startscreen,gamescreen,winscreen,losescreen,playbutton,gametimeout,timeout;
+
+
+
+        var gamefunc = function(){
+            var loadImage = new Array(); 
+        }
+
+        
         var canvas = document.getElementById('doorClose');
         var ctx = canvas.getContext("2d");
         canvas.width = 489;
@@ -124,7 +134,7 @@
                 Door.x = -160;
                 Door.z = 155;
             }
-            
+
         };
         var gameLoop = function() {
      
