@@ -1,5 +1,5 @@
 (function() {
-    var game_time = 10,starttimeout,timertimeout,is_loop = 1,barwidth = 10,bartimecout,gamescreen;
+    var game_time = 60,starttimeout,timertimeout,is_loop = 1,barwidth = 10,bartimecout,gamescreen;
     var Door = {};
         Door.x = -40;
         Door.z = 40;
@@ -64,7 +64,7 @@
                 game.startgame();
             }
             if(is_loop){
-                starttimeout = setTimeout(game.startgame, 10);
+                starttimeout = setTimeout(game.startgame, 20);
             }
         }
     creategame.prototype.downloadimageque = function(name,path) {
