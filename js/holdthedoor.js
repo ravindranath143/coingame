@@ -50,39 +50,6 @@
         if (Door.x < 0) {
             Door.x = Door.x - .2;
             Door.z = Door.z + .2;
-
-            ctx.drawImage(game.gameImages[3], 0, 0,980,1300,0,0,490,650);
-            ctx.drawImage(game.gameImages[4],0,0,980,1300,Door.x,Door.y,490,650);
-            ctx.drawImage(game.gameImages[5],0,0,980,1300,Door.z,Door.y,490,650);
-            ctx.drawImage(game.gameImages[2],0,0,980,1300,0,0,490,650);
-            ctx.drawImage(game.gameImages[1],0,0,980,1300,0,0,490,650);
-            ctx.drawImage(game.gameImages[0],0,0,821,313,200,0,100,50);
-            ctx.fillStyle = "#000";
-            ctx.font = "24px Helvetica";
-            ctx.textAlign = "left";
-            ctx.textBaseline = "top";
-            ctx.fillText(game_time,240, 10);
-            if(Door.x <0){
-                Door.x = Door.x -.2;
-                Door.z = Door.z +.2;
-            }
-            if (Door.x >= 0) {
-                Door.x =0;
-                Door.z=0;
-            }
-            if(Door.x <-158 && is_loop){
-                Door.x = -160;
-                Door.z = 155;
-                document.removeEventListener("click",game.closethedoor,false);
-                is_loop = 0;
-                clearTimeout(starttimeout);
-                game.startgame();
-            }
-
-            if(is_loop){
-                starttimeout = setTimeout(game.startgame, 20);
-            }
-
         }
         if (Door.x >= 0) {
             Door.x = 0;
