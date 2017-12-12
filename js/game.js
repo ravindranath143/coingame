@@ -10,8 +10,8 @@
         distance=0,
         audio_no = 10,
         prev_audio_no = 10,
-        gametimeout,
-        timeout,
+        soundtimeout,
+        timertimeout,
         timer_cnt = 60,
         is_mobile = 0,
         is_touch = 0,
@@ -208,7 +208,7 @@
 
         Gameevents.prototype.playsound = function() {
             gameflow.gameSounds[audio_no].play();
-            gametimeout = setTimeout(gevents.playsound, 300);
+            soundtimeout = setTimeout(gevents.playsound, 300);
         }
         Gameevents.prototype.startsound = function(e) {
             if(!is_touch){
@@ -229,14 +229,14 @@
         Gameevents.prototype.stopsound = function(e) {
             is_touch = !is_touch;
             clearTimeout(starttimeout);
-            clearTimeout(gametimeout);
+            clearTimeout(soundtimeout);
         }
         
         Gameevents.prototype.starttimer = function () {
             timer_cnt--;
             if(timer_cnt == 0){
-                clearTimeout(gametimeout);
-                clearTimeout(timeout);
+                clearTimeout(soundtimeout);
+                clearTimeout(timertimeout);
                 if( is_mobile) {
                     document.removeEventListener('touchstart', this.startsound, false);
                     document.removeEventListener('touchend', this.stopsound, false);
@@ -251,7 +251,7 @@
             context.font = 'italic 20pt Calibri';
             context.fillStyle = '#000';
             context.fillText(timer_cnt, canvas.width/2-10, 65);
-            timeout = setTimeout(gevents.starttimer, 1000);
+            timertimeout = setTimeout(gevents.starttimer, 1000);
         }
         Gameevents.prototype.onMouseMove = function (e) {
             if(e.type == 'touchmove'){
@@ -273,8 +273,8 @@
         Gameevents.prototype.CanvasClick = function (e) {
             distance = gevents.calculateDistance(e.pageX,e.pageY);
             if(distance < gameflow.blockradius){
-                clearTimeout(gametimeout);
-                clearTimeout(timeout);
+                clearTimeout(soundtimeout);
+                clearTimeout(timertimeout);
                 context.drawImage(gameflow.gameImages[8],0,0);
                 canvas.removeEventListener("click",this.CanvasClick,false);
                 if( is_mobile) {
@@ -302,7 +302,6 @@
             }
         }
         gevents = new Gameevents();
-
         function loadthegame() {
             gmethods.loadhanler()
         }
