@@ -134,7 +134,7 @@
               barwidth = ((game.loadedimages + game.failedimages)/6).toFixed() * 100; 
               progressbar.style.width = barwidth + '%'; 
               progressbar.innerHTML = barwidth * 1  + '%';
-              bartimecout = setTimeout(game.startafterdownload, 20);
+              bartimecout = setTimeout(game.startafterdownload, 30);
             }
     };
     function loadhanler() {
