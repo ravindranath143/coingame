@@ -26,28 +26,52 @@ margin: 0 auto;
   color: white;
 
 }
-.lost-screen{
-background: url(../img/lose-screen.jpg) no-repeat #5a5a5a;
-    background-size: contain;
-    height: 100%;
-    background-position: 50% 50%;
-    position: relative;
+div#invisible-coin .lost-screen{
+    background: url(../img/invisible-lose.png) no-repeat #2c242a;
+    padding: 0;
+    margin: 0;
+    background-size: 100% 100%;
 }
-.win-screen{
-background: url(../img/win-screen.png) no-repeat #7d344a ;
-    background-size: contain;
-    height: 100%;
-    background-position: 50% 50%;
-    position: relative;
+
+
+div#invisible-coin .win-screen{
+    background: url(../img/invisible-win.png) no-repeat #2c242a;
+    padding: 0;
+    margin: 0;
+    background-size: 100% 100%;
 }
+
 /* #150a10 */
-.start-screen{
-    background: url(../img/coach-mark.png) no-repeat #150a10;
+div#invisible-coin .start-screen{
+   /* background: url(../img/invisible-coach.png) no-repeat #150a10;
     background-size: contain;
     height: 100%;
     background-position: 50% 50%;
-    position: relative;
+    position: relative;*/
+    background: url(../img/invisible-coach.png) no-repeat #2c242a;
+    padding: 0;
+    margin: 0;
+    background-size: 100% 100%;
 }
+div#holdthedoor .lost-screen{
+    background: url(../img/htd-lose.png) no-repeat #2c242a;
+    padding: 0;
+    margin: 0;
+    background-size: 100% 100%;
+} 
+div#holdthedoor .start-screen{
+    background: url(../img/htd-coach.png) no-repeat #2c242a;
+    padding: 0;
+    margin: 0;
+    background-size: 100% 100%;
+} 
+div#holdthedoor .win-screen{
+    background: url(../img/htd-win.png) no-repeat #2c242a;
+    padding: 0;
+    margin: 0;
+    background-size: 100% 100%;
+} 
+
 .intro-text {
     text-align: center;
     color: white;

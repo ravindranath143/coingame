@@ -48,7 +48,7 @@
                 gamescreen.style.webkitOverflowScrolling = 'auto';
                 winscreen.style.display = 'none';
                 losescreen.style.display = 'none';
-                timer_cnt = 60;
+                timer_cnt = 5;
                 //setting coin dimensions
                 this.blockradius = Math.floor(Math.sqrt((canvas.width/3) * (canvas.height/3))/3);
                 this.CoinX = (Math.random() * (canvas.width - this.blockradius)).toFixed();
