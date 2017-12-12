@@ -1,6 +1,12 @@
 (function() {
+<<<<<<< HEAD
     var game_time = 60,starttimeout,timertimeout,is_loop = 1,barwidth = 10,bartimecout,gamescreen;
+=======
+
+    var game_time = 10,starttimeout,timertimeout,is_loop = 1;
+>>>>>>> 2694ff03bda12a03d8ce3d2ad02dae7beb281b4f
     var Door = {};
+
         Door.x = -40;
         Door.z = 40;
         Door.y = 1;
@@ -63,6 +69,7 @@
                 clearTimeout(starttimeout);
                 game.startgame();
             }
+
             if(is_loop){
                 starttimeout = setTimeout(game.startgame, 20);
             }
@@ -123,3 +130,4 @@
     console.log(game);
     window.addEventListener("load",loadhanler,false);
 })();
+
