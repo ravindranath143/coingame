@@ -1,6 +1,14 @@
 (function() {
+
     var game_time = 10,
         starttimeout, timertimeout, is_loop = 1;
+
+
+    var game_time = 60,starttimeout,timertimeout,is_loop = 1,barwidth = 10,bartimecout,gamescreen;
+
+
+    var game_time = 10,starttimeout,timertimeout,is_loop = 1;
+
     var Door = {};
     Door.x = -40;
     Door.z = 40;
@@ -36,6 +44,7 @@
 
     creategame.prototype.startgame = function() {
         // console.log('looping')
+
         ctx.drawImage(game.gameImages[3], 0, 0, 980, 1300, 0, 0, 490, 650);
         ctx.drawImage(game.gameImages[4], 0, 0, 980, 1300, Door.x, Door.y, 490, 650);
         ctx.drawImage(game.gameImages[5], 0, 0, 980, 1300, Door.z, Door.y, 490, 650);
@@ -50,6 +59,39 @@
         if (Door.x < 0) {
             Door.x = Door.x - .2;
             Door.z = Door.z + .2;
+
+            ctx.drawImage(game.gameImages[3], 0, 0,980,1300,0,0,490,650);
+            ctx.drawImage(game.gameImages[4],0,0,980,1300,Door.x,Door.y,490,650);
+            ctx.drawImage(game.gameImages[5],0,0,980,1300,Door.z,Door.y,490,650);
+            ctx.drawImage(game.gameImages[2],0,0,980,1300,0,0,490,650);
+            ctx.drawImage(game.gameImages[1],0,0,980,1300,0,0,490,650);
+            ctx.drawImage(game.gameImages[0],0,0,821,313,200,0,100,50);
+            ctx.fillStyle = "#000";
+            ctx.font = "24px Helvetica";
+            ctx.textAlign = "left";
+            ctx.textBaseline = "top";
+            ctx.fillText(game_time,240, 10);
+            if(Door.x <0){
+                Door.x = Door.x -.2;
+                Door.z = Door.z +.2;
+            }
+            if (Door.x >= 0) {
+                Door.x =0;
+                Door.z=0;
+            }
+            if(Door.x <-158 && is_loop){
+                Door.x = -160;
+                Door.z = 155;
+                document.removeEventListener("click",game.closethedoor,false);
+                is_loop = 0;
+                clearTimeout(starttimeout);
+                game.startgame();
+            }
+
+            if(is_loop){
+                starttimeout = setTimeout(game.startgame, 20);
+            }
+
         }
         if (Door.x >= 0) {
             Door.x = 0;
@@ -91,7 +133,24 @@
         game_time--;
         timertimeout = setTimeout(game.starttimer, 1000);
     };
+    creategame.prototype.startafterdownload = function(name,path) {
+         if (barwidth >= 100) {
+              gamescreen.style.display = 'block';
+              loadingscreen.style.display = 'none';
+              game.startgame();
+              game.starttimer();
+            } else {
+              barwidth = ((game.loadedimages + game.failedimages)/6).toFixed() * 100; 
+              progressbar.style.width = barwidth + '%'; 
+              progressbar.innerHTML = barwidth * 1  + '%';
+              bartimecout = setTimeout(game.startafterdownload, 20);
+            }
+    };
     function loadhanler() {
+        loadingscreen = document.getElementById('loading_screen');
+        progressbar = document.getElementById("Progressbar");
+        gamescreen = document.getElementById("catchwer");
+        gamescreen.style.display = 'none';
         game.downloadimageque("timer", "css/timer.png");
         game.downloadimageque("button", "css/button.png");
         game.downloadimageque("frame", "css/door-side.png");
@@ -100,8 +159,13 @@
         game.downloadimageque("right_door", "css/right_door.png");
         document.addEventListener("click", game.closethedoor, false);
         game.downloadimages();
+
         game.startgame();
         game.starttimer();
+
+        game.startafterdownload();
+
+
     }
     console.log(game);
     window.addEventListener("load", loadhanler, false);
