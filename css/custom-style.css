@@ -30,6 +30,7 @@ div#invisible-coin .lost-screen{
     background: url(../img/invisible-lose.png) no-repeat #2c242a;
     padding: 0;
     margin: 0;
+    height: -webkit-fill-available;
     background-size: 100% 100%;
 }
 
@@ -38,6 +39,7 @@ div#invisible-coin .win-screen{
     background: url(../img/invisible-win.png) no-repeat #2c242a;
     padding: 0;
     margin: 0;
+    height: -webkit-fill-available;
     background-size: 100% 100%;
 }
 
@@ -50,6 +52,7 @@ div#invisible-coin .start-screen{
     position: relative;*/
     background: url(../img/invisible-coach.png) no-repeat #2c242a;
     padding: 0;
+    height: -webkit-fill-available;
     margin: 0;
     background-size: 100% 100%;
 }
@@ -57,18 +60,21 @@ div#holdthedoor .lost-screen{
     background: url(../img/htd-lose.png) no-repeat #2c242a;
     padding: 0;
     margin: 0;
+    height: -webkit-fill-available;
     background-size: 100% 100%;
 } 
 div#holdthedoor .start-screen{
     background: url(../img/htd-coach.png) no-repeat #2c242a;
     padding: 0;
     margin: 0;
+    height: -webkit-fill-available;
     background-size: 100% 100%;
 } 
 div#holdthedoor .win-screen{
     background: url(../img/htd-win.png) no-repeat #2c242a;
     padding: 0;
     margin: 0;
+    height: -webkit-fill-available;
     background-size: 100% 100%;
 } 
 
