@@ -129,11 +129,16 @@ canvas {
 }
 
 
+
 @media screen and (min-device-width: 250px) and (max-device-width: 768px){
     .displayScreen {
     height: 100%;
     margin: 0 auto;
     width: 100%;
+}
+section#start-sreen {
+    height: 100vh;
+    background-color: #34011d;
 }
 .catchwer {
     width: 100%;
