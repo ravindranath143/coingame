@@ -1,26 +1,24 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-	<meta name="viewport" content="width=device-width, initial-scale=1 initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-      <link rel="stylesheet" type="text/css" href="css/custom-style.css">
+  <head>
+  	<meta name="viewport" content="width=device-width, initial-scale=1 initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" type="text/css" href="css/custom-style.css">
     <meta name="viewport" content="width=device-width, user-scalable=no" />
-
-    <title>Hold Th0e Door</title>
-</head>
-
-<body>
-	<div id="holdthedoor">
-		<section id="loading_screen">
-    <div id="Progressblock">
-      <div id="Progressbar">10%</div>
-    </div>
-  </section>
-  <section id="start_screen">
+    <title>catchwer</title>
+  </head>
+  <body>
+    <!-- loader block-->
+  	<section id="loading_screen">
+      <div id="Progressblock">
+        <div id="Progressbar">10%</div>
+      </div>
+    </section>
+    <!-- coach mark block-->
+    <section id="start_screen">
       <div class="displayScreen">
         <div class="start-screen">
           <div class="intro-text">
-            Tap & trace your finger<br>
+            Tap &amp; trace your finger<br>
             around the dark storeroom to<br>
             find the Mynt-Coin
           </div>
@@ -33,14 +31,14 @@
           </div>
         </div>
       </div>
-   </section>
-
-  <div id="catchwer" class="catchwer">
-      <canvas id="doorClose">
-      </canvas>
-  </div>
-
-  <section id="win_screen">
+    </section>
+    <!-- game block -->
+    <div id="catchwer" class="catchwer">
+        <canvas id="doorClose">
+        </canvas>
+    </div>
+    <!-- win block -->
+    <section id="win_screen">
       <div class="displayScreen">
         <div class="win-screen">
           <div class="sreen-text">
@@ -48,12 +46,11 @@
             <div>
               <img class="myntra-coins" src="img/coin.png">
             </div>
-            <h1>1000</h1>
+            <h1 id="win_score">1000</h1>
             <div>
               <button id="play" class="play"></button>
             </div>
           </div>
-
           <div class="play-options">
             <ul>
               <li><button>VIEW MORE GAMES</button></li>
@@ -63,7 +60,7 @@
         </div>
       </div>
     </section>
-
+    <!-- lose block -->
     <section id="lose_screen">
       <div class="displayScreen">
         <div class="lost-screen">
@@ -72,12 +69,11 @@
             <div>
               <img class="myntra-coins" src="img/coin.png">
             </div>
-            <h1>1000</h1>
+            <h1 id="lose_score">1000</h1>
             <div>
               <button id="play" class="play"></button>
             </div>
           </div>
-
           <div class="play-options">
             <ul>
               <li><button>VIEW MORE GAMES</button></li>
@@ -88,8 +84,12 @@
       </div>
     </section>
 
-	</div>
-   <script type="text/javascript" src="js/holdthedoor.js"></script>
-</body>
+    <section>
+      <button id="facebook">Share in FB</button>
+      <button id="twitter">Share in Twitter</button>
+    </section>
+    <!-- including game script -->
+    <script type="text/javascript" src="js/holdthedoor.js"></script>
+  </body>
 
 </html>

@@ -10,12 +10,14 @@
         is_loop = 1,
         barwidth = 10,
         bartimecout,
-        gamescreen;
+        gamescreen,
+        initial_score = 0;
     var Door = {};
     var canvas = document.getElementById('doorClose');
     var ctx = canvas.getContext("2d");
     canvas.width = 489;
     canvas.height = 650;
+    // game Object
     function creategame() {
         this.totalimages = 6;
         this.loadedimages = 0;
@@ -26,7 +28,6 @@
     var game = new creategame();
     creategame.prototype.downloadimages = function() {
         var _self = this;
-        //Images
         for (var i = 0; i < this.downloadimageQueue.length; i++) {
             var path = this.downloadimageQueue[i][1];
             var img = new Image();
@@ -40,7 +41,6 @@
             this.gameImages[i] = img;
         }
     };
-
     creategame.prototype.starscreen = function() {
         loadingscreen.style.display = 'none';
         startscreen.style.display = 'block';
@@ -48,7 +48,6 @@
         winscreen.style.display = 'none';
         losescreen.style.display = 'none';
     }
-
     creategame.prototype.loopthegame = function() {
         ctx.drawImage(game.gameImages[3], 0, 0, 980, 1300, 0, 0, 490, 650);
         ctx.drawImage(game.gameImages[4], 0, 0, 980, 1300, Door.x, Door.y, 490, 650);
@@ -72,16 +71,20 @@
         if (Door.x < -158 && is_loop) {
             Door.x = -160;
             Door.z = 160;
-            document.removeEventListener("click", game.closethedoor, false);
-            is_loop = 0;
-            clearTimeout(starttimeout);
-            clearTimeout(timertimeout);
-            game.loopthegame();
+            game.stopgame();
+            document.getElementById("lose_score").innerHTML = initial_score;
             setTimeout(game.losescreen, 300);
         }
         if (is_loop) {
             starttimeout = setTimeout(game.loopthegame, 20);
         }
+    }
+    creategame.prototype.stopgame = function() {
+        document.removeEventListener("click", game.closethedoor, false);
+        is_loop = 0;
+        clearTimeout(starttimeout);
+        clearTimeout(timertimeout);
+        game.loopthegame();
     }
 
     creategame.prototype.startgame = function() {
@@ -117,42 +120,38 @@
     creategame.prototype.closethedoor = function(name, path) {
         Door.x = Door.x + 3;
         Door.z = Door.z - 3;
-
         if (Door.x >= 0) {
             Door.x = 0;
             Door.z = 0;
-            document.removeEventListener("click", game.closethedoor, false);
-            is_loop = 0;
-            clearTimeout(starttimeout);
-            clearTimeout(timertimeout);
-            game.loopthegame();
+            game.stopgame();
+            initial_score = ((game_time/60)*100).toFixed();
+            document.getElementById("win_score").innerHTML = initial_score;
+            console.log(initial_score);
             setTimeout(game.winscreen, 300);
         }
     };
     creategame.prototype.starttimer = function(name, path) {
         if (game_time == 0) {
+            game.stopgame();
+            document.getElementById("lose_score").innerHTML = initial_score;
             setTimeout(game.losescreen, 300);
-            document.removeEventListener("click", game.closethedoor, false);
-            clearTimeout(starttimeout);
-            clearTimeout(timertimeout);
         }
         game_time--;
         timertimeout = setTimeout(game.starttimer, 1000);
     };
     creategame.prototype.startafterdownload = function(name,path) {
-         if (barwidth >= 100) {
-            console.log('in')
-              for (var i = 0; i < playbutton.length; i++) {
-                    playbutton[i].addEventListener("click",game.startgame,false);
-                }
-
-              game.starscreen();
-            } else {
-              barwidth = ((game.loadedimages + game.failedimages)/6).toFixed() * 100; 
-              progressbar.style.width = barwidth + '%'; 
-              progressbar.innerHTML = barwidth * 1  + '%';
-              bartimecout = setTimeout(game.startafterdownload, 30);
+        if (barwidth >= 100) {
+            for (var i = 0; i < playbutton.length; i++) {
+                playbutton[i].addEventListener("click",game.startgame,false);
             }
+            clearTimeout(bartimecout);
+            game.starscreen();
+        } else {
+            barwidth = ((game.loadedimages + game.failedimages)/6).toFixed() * 100; 
+            progressbar.style.width = barwidth + '%'; 
+            progressbar.innerHTML = barwidth * 1  + '%';
+            bartimecout = setTimeout(game.startafterdownload, 30);
+        }
     };
     function loadhanler() {
         loadingscreen = document.getElementById('loading_screen');
@@ -163,17 +162,28 @@
         losescreen = document.getElementById('lose_screen');
         playbutton = document.getElementsByClassName('play');
         gamescreen.style.display = 'none';
-        game.downloadimageque("timer", "css/timer.png");
-        game.downloadimageque("button", "css/button.png");
-        game.downloadimageque("frame", "css/door-side.png");
-        game.downloadimageque("crowd", "css/crowded.png");
-        game.downloadimageque("left_door", "css/left_door.png");
-        game.downloadimageque("right_door", "css/right_door.png");
+        game.downloadimageque("timer", "img/timer.png");
+        game.downloadimageque("button", "img/button.png");
+        game.downloadimageque("frame", "img/door-side.png");
+        game.downloadimageque("crowd", "img/crowded.png");
+        game.downloadimageque("left_door", "img/left_door.png");
+        game.downloadimageque("right_door", "img/right_door.png");
         game.downloadimages();
         game.startafterdownload();
-
-
     }
+    var social = {
+        twitter: "https://twitter.com/intent/tweet?text=myntra.com",
+        facebook: "https://www.facebook.com/sharer/sharer.php?u=myntra.com"
+    };
+    var fbbutton = document.getElementById("facebook");
+    var twitterbutton = document.getElementById("twitter");
+    fbbutton.addEventListener("click",function () {
+        window.open(social.facebook, '_blank', 'location=yes,height=570,width=520,scrollbars=yes,status=yes');
+    },false);
+    twitterbutton.addEventListener("click",function () {
+        window.open(social.twitter, '_blank', 'location=yes,height=570,width=520,scrollbars=yes,status=yes');
+    },false);
+    console.log(social);
     console.log(game);
     window.addEventListener("load", loadhanler, false);
 })();
