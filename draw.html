@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+		#sketchpad{
+			background-color: blue;
+		}
+	</style>
+</head>
+<body>
+<canvas id="sketchpad" width="600" height="300"></canvas>
+
+
+	<script type="text/javascript">
+		var canvas, ctx
+var mouseX, mouseY, mouseDown = 0,
+    lastX, lastY;
+
+function draw(ctx,x,y,size) {
+    // if (lastX && lastY && (x !== lastX || y !== lastY)) {
+    //     ctx.fillStyle = "#fff";
+    //     ctx.lineWidth = 2 * size;
+    //     ctx.beginPath();
+    //     ctx.moveTo(lastX, lastY);
+    //     ctx.lineTo(x, y);
+    //     ctx.stroke();
+    // }
+  // ctx.fillStyle = "#fff";
+   var alpha = .1;
+  ctx.fillStyle = "rgba(255, 0, 0, " + alpha + ")";
+  ctx.beginPath();
+  ctx.arc(x, y, size, 0, Math.PI*2, true);
+  ctx.closePath();
+  ctx.fill();
+  lastX = x;
+  lastY = y;
+}
+
+function clearCanvas(canvas,ctx) {
+  ctx.clearRect(0, 0, canvas.width, canvas.height)
+}
+
+// function onMouseDown() {
+//   mouseDown = 1
+//   draw(ctx, mouseX, mouseY, 2)
+// }
+
+// function onMouseUp() {
+//   mouseDown = 0;
+//   lastX = 0;
+//   lastY = 0;
+// }
+
+var onMouseMove = function(e) {
+	var alpha = .1;
+	  ctx.fillStyle = "rgba(255, 0, 0, " + alpha + ")";
+	  ctx.beginPath();
+	  ctx.arc(e.pageX, e.pageY, 2, 0, Math.PI*2, true);
+	  ctx.closePath();
+	  ctx.fill();
+	  // lastX = x;
+	  // lastY = y;
+	console.log(e)
+  // getMousePos(e)
+  //     draw(ctx, mouseX, mouseY, 2)
+}
+
+function getMousePos(e) {
+  if (!e)
+      var e = event
+  if (e.offsetX) {
+      mouseX = e.offsetX
+      mouseY = e.offsetY
+  }
+  else if (e.layerX) {
+      mouseX = e.layerX
+      mouseY = e.layerY
+  }
+ }
+
+function init() {
+    canvas = document.getElementById('sketchpad')
+    ctx = canvas.getContext('2d')
+    canvas.addEventListener('mousemove', onMouseMove, false)
+}
+
+init();
+	</script>
+</body>
+</html>
