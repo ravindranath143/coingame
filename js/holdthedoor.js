@@ -1,9 +1,17 @@
 (function() {
-    var game_time = 60,starttimeout,timertimeout,is_loop = 1,barwidth = 10,bartimecout,gamescreen;
+    var startscreen,
+        gamescreen,
+        winscreen,
+        losescreen,
+        playbutton,
+        game_time = 60,
+        starttimeout,
+        timertimeout,
+        is_loop = 1,
+        barwidth = 10,
+        bartimecout,
+        gamescreen;
     var Door = {};
-    Door.x = -40;
-    Door.z = 40;
-    Door.y = 1;
     var canvas = document.getElementById('doorClose');
     var ctx = canvas.getContext("2d");
     canvas.width = 489;
@@ -33,9 +41,15 @@
         }
     };
 
-    creategame.prototype.startgame = function() {
-        // console.log('looping')
+    creategame.prototype.starscreen = function() {
+        loadingscreen.style.display = 'none';
+        startscreen.style.display = 'block';
+        gamescreen.style.display = 'none';
+        winscreen.style.display = 'none';
+        losescreen.style.display = 'none';
+    }
 
+    creategame.prototype.loopthegame = function() {
         ctx.drawImage(game.gameImages[3], 0, 0, 980, 1300, 0, 0, 490, 650);
         ctx.drawImage(game.gameImages[4], 0, 0, 980, 1300, Door.x, Door.y, 490, 650);
         ctx.drawImage(game.gameImages[5], 0, 0, 980, 1300, Door.z, Door.y, 490, 650);
@@ -61,11 +75,41 @@
             document.removeEventListener("click", game.closethedoor, false);
             is_loop = 0;
             clearTimeout(starttimeout);
-            game.startgame();
+            clearTimeout(timertimeout);
+            game.loopthegame();
+            setTimeout(game.losescreen, 300);
         }
         if (is_loop) {
-            starttimeout = setTimeout(game.startgame, 20);
+            starttimeout = setTimeout(game.loopthegame, 20);
         }
+    }
+
+    creategame.prototype.startgame = function() {
+        startscreen.style.display = 'none';
+        gamescreen.style.display = 'block';
+        winscreen.style.display = 'none';
+        losescreen.style.display = 'none';
+        Door.x = -40;
+        Door.z = 40;
+        Door.y = 1;
+        game_time = 60;
+        is_loop = 1;
+        document.addEventListener("click", game.closethedoor, false);
+        game.loopthegame();
+        game.starttimer();
+    }
+    creategame.prototype.winscreen = function() {
+        startscreen.style.display = 'none';
+        gamescreen.style.display = 'none';
+        winscreen.style.display = 'block';
+        losescreen.style.display = 'none';
+    }
+
+    creategame.prototype.losescreen = function() {
+        startscreen.style.display = 'none';
+        gamescreen.style.display = 'none';
+        winscreen.style.display = 'none';
+        losescreen.style.display = 'block';
     }
     creategame.prototype.downloadimageque = function(name, path) {
         this.downloadimageQueue.push([name, path]);
@@ -80,23 +124,29 @@
             document.removeEventListener("click", game.closethedoor, false);
             is_loop = 0;
             clearTimeout(starttimeout);
-            game.startgame();
+            clearTimeout(timertimeout);
+            game.loopthegame();
+            setTimeout(game.winscreen, 300);
         }
     };
     creategame.prototype.starttimer = function(name, path) {
         if (game_time == 0) {
+            setTimeout(game.losescreen, 300);
             document.removeEventListener("click", game.closethedoor, false);
             clearTimeout(starttimeout);
+            clearTimeout(timertimeout);
         }
         game_time--;
         timertimeout = setTimeout(game.starttimer, 1000);
     };
     creategame.prototype.startafterdownload = function(name,path) {
          if (barwidth >= 100) {
-              gamescreen.style.display = 'block';
-              loadingscreen.style.display = 'none';
-              game.startgame();
-              game.starttimer();
+            console.log('in')
+              for (var i = 0; i < playbutton.length; i++) {
+                    playbutton[i].addEventListener("click",game.startgame,false);
+                }
+
+              game.starscreen();
             } else {
               barwidth = ((game.loadedimages + game.failedimages)/6).toFixed() * 100; 
               progressbar.style.width = barwidth + '%'; 
@@ -107,7 +157,11 @@
     function loadhanler() {
         loadingscreen = document.getElementById('loading_screen');
         progressbar = document.getElementById("Progressbar");
+        startscreen = document.getElementById('start_screen');
         gamescreen = document.getElementById("catchwer");
+        winscreen = document.getElementById('win_screen');
+        losescreen = document.getElementById('lose_screen');
+        playbutton = document.getElementsByClassName('play');
         gamescreen.style.display = 'none';
         game.downloadimageque("timer", "css/timer.png");
         game.downloadimageque("button", "css/button.png");
@@ -115,12 +169,7 @@
         game.downloadimageque("crowd", "css/crowded.png");
         game.downloadimageque("left_door", "css/left_door.png");
         game.downloadimageque("right_door", "css/right_door.png");
-        document.addEventListener("click", game.closethedoor, false);
         game.downloadimages();
-
-        game.startgame();
-        game.starttimer();
-
         game.startafterdownload();
 
 

@@ -8,14 +8,81 @@
 
 <body>
 	<section id="loading_screen">
-      <div id="Progressblock">
-        <div id="Progressbar">10%</div>
+    <div id="Progressblock">
+      <div id="Progressbar">10%</div>
+    </div>
+  </section>
+  <section id="start_screen">
+      <div class="displayScreen">
+        <div class="start-screen">
+          <div class="intro-text">
+            Tap & trace your finger<br>
+            around the dark storeroom to<br>
+            find the Mynt-Coin
+          </div>
+          <div class="audio-alert">
+            Make sure you turn your <br>
+            audio on before playing.
+          </div>
+          <div class="play-button">
+            <button id="play" class="play"></button>
+          </div>
+        </div>
+      </div>
+   </section>
+
+  <div id="catchwer" class="catchwer">
+      <canvas id="doorClose">
+      </canvas>
+  </div>
+
+  <section id="win_screen">
+      <div class="displayScreen">
+        <div class="win-screen">
+          <div class="sreen-text">
+            <h3>YOU FOUND IT</h3>
+            <div>
+              <img class="myntra-coins" src="img/coin.png">
+            </div>
+            <h1>1000</h1>
+            <div>
+              <button id="play" class="play"></button>
+            </div>
+          </div>
+
+          <div class="play-options">
+            <ul>
+              <li><button>VIEW MORE GAMES</button></li>
+              <li><button>VIEW YOUR MYNT-COINS</button></li>
+            </ul>
+          </div>
+        </div>
       </div>
     </section>
-    <div id="catchwer" class="catchwer">
-        <canvas id="doorClose">
-        </canvas>
-    </div>
+
+    <section id="lose_screen">
+      <div class="displayScreen">
+        <div class="lost-screen">
+          <div class="sreen-text">
+            <h3>OH NO! DON't<br>GIVE UP YET!</h3>
+            <div>
+              <img class="myntra-coins" src="img/coin.png">
+            </div>
+            <h1>1000</h1>
+            <div>
+              <button id="play" class="play"></button>
+            </div>
+          </div>
+
+          <div class="play-options">
+            <ul>
+              <li><button>VIEW MORE GAMES</button></li>
+              <li><button>VIEW YOUR MYNT-COINS</button></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
 
    <script type="text/javascript" src="js/holdthedoor.js"></script>
 </body>

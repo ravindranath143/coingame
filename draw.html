@@ -2,6 +2,11 @@
 <html>
 <head>
 	<title></title>
+	<style type="text/css">
+		#sketchpad{
+			background-color: blue;
+		}
+	</style>
 </head>
 <body>
 <canvas id="sketchpad" width="600" height="300"></canvas>
@@ -21,7 +26,9 @@ function draw(ctx,x,y,size) {
     //     ctx.lineTo(x, y);
     //     ctx.stroke();
     // }
-  ctx.fillStyle = "#fff";
+  // ctx.fillStyle = "#fff";
+   var alpha = .1;
+  ctx.fillStyle = "rgba(255, 0, 0, " + alpha + ")";
   ctx.beginPath();
   ctx.arc(x, y, size, 0, Math.PI*2, true);
   ctx.closePath();
@@ -34,22 +41,29 @@ function clearCanvas(canvas,ctx) {
   ctx.clearRect(0, 0, canvas.width, canvas.height)
 }
 
-function onMouseDown() {
-  mouseDown = 1
-  draw(ctx, mouseX, mouseY, 2)
-}
+// function onMouseDown() {
+//   mouseDown = 1
+//   draw(ctx, mouseX, mouseY, 2)
+// }
 
-function onMouseUp() {
-  mouseDown = 0;
-  lastX = 0;
-  lastY = 0;
-}
+// function onMouseUp() {
+//   mouseDown = 0;
+//   lastX = 0;
+//   lastY = 0;
+// }
 
-function onMouseMove(e) {
-  getMousePos(e)
-  if (mouseDown == 1) {
-      draw(ctx, mouseX, mouseY, 2)
-  }
+var onMouseMove = function(e) {
+	var alpha = .1;
+	  ctx.fillStyle = "rgba(255, 0, 0, " + alpha + ")";
+	  ctx.beginPath();
+	  ctx.arc(e.pageX, e.pageY, 2, 0, Math.PI*2, true);
+	  ctx.closePath();
+	  ctx.fill();
+	  // lastX = x;
+	  // lastY = y;
+	console.log(e)
+  // getMousePos(e)
+  //     draw(ctx, mouseX, mouseY, 2)
 }
 
 function getMousePos(e) {
@@ -68,9 +82,7 @@ function getMousePos(e) {
 function init() {
     canvas = document.getElementById('sketchpad')
     ctx = canvas.getContext('2d')
-    canvas.addEventListener('mousemove', onMouseDown, false)
     canvas.addEventListener('mousemove', onMouseMove, false)
-    window.addEventListener('mouseup', onMouseUp, false)
 }
 
 init();
