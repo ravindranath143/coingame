@@ -148,12 +148,6 @@
                 // gameflow.downloadimage("coach_mark", "img/coach-mark.png");
 
                 //loading sounds
-                gameflow.downloadaudio("16", "/sounds/1.mp3");
-                gameflow.downloadaudio("15", "/sounds/1.mp3");
-                gameflow.downloadaudio("14", "/sounds/1.mp3");
-                gameflow.downloadaudio("13", "/sounds/1.mp3");
-                gameflow.downloadaudio("12", "/sounds/1.mp3");
-                gameflow.downloadaudio("11", "/sounds/1.mp3");
                 gameflow.downloadaudio("10", "/sounds/1.mp3");
                 gameflow.downloadaudio("9", "/sounds/2.mp3");
                 gameflow.downloadaudio("8", "/sounds/3.mp3");
@@ -214,10 +208,12 @@
                 is_touch = !is_touch;
                 distance = gevents.calculateDistance(e.touches[0].pageX,e.touches[0].pageY);
                 audio_no = (distance/gameflow.blockradius).toFixed();
-                if(prev_audio_no != audio_no){
-                    gameflow.gameSounds[prev_audio_no].pause();
-                    prev_audio_no = audio_no;
-                }
+                if(audio_no >= 10)
+                    audio_no = 10;
+                // if(prev_audio_no != audio_no){
+                //     gameflow.gameSounds[prev_audio_no].pause();
+                //     prev_audio_no = audio_no;
+                // }
                 starttimeout = setTimeout(gevents.playsound, 300);
             } 
             setTimeout(function () {
@@ -269,6 +265,8 @@
                 distance = gevents.calculateDistance(e.pageX,e.pageY);
             }
             audio_no = (distance/gameflow.blockradius).toFixed();
+            if(audio_no >= 10)
+                    audio_no = 10;
             if(distance < gameflow.blockradius){
                 document.body.style.cursor = 'pointer';
             }else{
