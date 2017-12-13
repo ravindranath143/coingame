@@ -76,10 +76,11 @@
             setTimeout(game.losescreen, 300);
         }
         if (is_loop) {
-            starttimeout = setTimeout(game.loopthegame, 20);
+            starttimeout = setTimeout(game.loopthegame, 15);
         }
     }
     creategame.prototype.stopgame = function() {
+        //send ajax here
         document.removeEventListener("click", game.closethedoor, false);
         is_loop = 0;
         clearTimeout(starttimeout);
@@ -92,8 +93,8 @@
         gamescreen.style.display = 'block';
         winscreen.style.display = 'none';
         losescreen.style.display = 'none';
-        Door.x = -40;
-        Door.z = 40;
+        Door.x = -80;
+        Door.z = 80;
         Door.y = 1;
         game_time = 60;
         is_loop = 1;
