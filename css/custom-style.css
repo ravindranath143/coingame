@@ -33,17 +33,16 @@ margin: 0 auto;
 
 }
 div#invisible-coin .lost-screen{
-    background: url(../img/invisible-lose.png) no-repeat #2c242a;
-    background-size: contain;
-    height: 100%;
-    background-position: 50% 50%;
+    background: url(../img/invisible-lose.png) no-repeat;
+    background-size: 100%;
+    background-position: 50% 0%;
     position: relative;
 }
 div#invisible-coin .win-screen{
-    background: url(../img/invisible-win.png) no-repeat #2c242a;
-    background-size: contain;
+    background: url(../img/invisible-win.png) no-repeat;
+    background-size: 100%;
     height: 100%;
-    background-position: 50% 50%;
+    background-position: 50% 0%;
     position: relative;
 }
 .win-screen h1 {
@@ -55,8 +54,8 @@ div#invisible-coin .win-screen{
 }
 
 div#invisible-coin .start-screen{
-   background: url(../img/invisible-coach.png) no-repeat #150a10;
-    background-size: contain;
+   background: url(../img/invisible-coach.png) no-repeat;
+    background-size: 100%;
     height: 100%;
     width: 100%;
     background-position: 50% 0%;
@@ -159,6 +158,17 @@ img.myntra-coins {
     margin: auto;
     display: block;
 }
+section#win_screen .displayScreen {
+
+   /* background: url(../img/inwin.png);*/
+   background: #7d344e;
+}
+section#start_screen .displayScreen{
+    background: url(../img/inbase.png);
+}
+section#lose_screen .displayScreen{
+    background: #575757;
+}
 button#play{
  background: url(../img/playnow.png);
     background-size: 116px;
@@ -213,7 +223,7 @@ button#play-again {
     margin-top: 30px;
 }
 .sreen-text h3 {
-    padding-top: 109px;
+    padding-top: 80px;
 }
 .win-screen h3 {
     color: #78314c;
@@ -254,10 +264,11 @@ ul.share-icons img {
 
 @media screen and (min-device-width: 250px) and (max-device-width: 768px){
     .displayScreen {
-    height: 100%;
-    margin: 0 auto;
+   margin: auto;
     width: 100%;
+    height: -webkit-fill-available;
 }
+
 .catchwer {
     width: 100%;
     margin: auto;
@@ -311,7 +322,7 @@ canvas {
 .audio-alert {
     line-height: 23px;
     font-size: 18px;
-    padding-top: 136px;
+    padding-top: 100px;
 }
 button#play {
     margin-top: 24px;
@@ -324,18 +335,43 @@ button#play {
 }
 }
 
+@media screen and (max-device-width: 320px){
+    .intro-text {
+    padding-top: 85px;
 
+}
+.lost-screen .sreen-text {
+    padding-top: 61px;
+}
+.lost-screen .sreen-text h3 {
+    font-size: 12px;
+    padding-top: 45px;
+}
+span.bigger-size {
+    font-size: 18px;
+}
+img.myntra-coins {
+    width: 110px;
+    margin-top: 10px;
+    margin-bottom: 12px;
+}
+button#play-again {
+   
+    background-size: 140px;
+    width: 144px;
+}
+}
 @media screen and (min-device-width: 321px) and (max-device-width:378px){
  .intro-text {
    
-    padding-top: 159px;
+    padding-top: 123px;
     
 }
 .win-screen button#play {
     margin-top: 78px;
 }
 .lost-screen .sreen-text {
-    padding-top: 135px;
+    padding-top: 68px;
 }
 .lost-screen button#play {
     margin-top: 65px;
@@ -349,7 +385,7 @@ button#play {
 }
 @media screen and (min-device-width: 321px) and (max-device-width:361px){
 .intro-text {
-    padding-top: 152px;
+    padding-top: 104px;
 }
 .lost-screen button#play {
     margin-top: 50px;
@@ -363,12 +399,15 @@ button#play {
 .win-screen button#play {
     margin-top: 72px;
 }
+button#play-again {
+    margin-top: 15px;
+}
 }
 
 @media screen and (min-device-width: 379px) and (max-device-width:456px){
     .intro-text {
     font-size: 20px;
-    padding-top: 160px;
+    padding-top: 128px;
     
 }
 .win-screen .sreen-text {
@@ -382,10 +421,10 @@ button#play {
     padding-top: 172px;
 }
 .lost-screen .sreen-text {
-    padding-top: 170px;
+    padding-top: 85px;
 }
 button#play {
-    margin-top: 65px;
+    margin-top: 50px;
 }
 .play-options ul {
     width: 90%;
