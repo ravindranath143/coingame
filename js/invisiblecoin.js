@@ -320,5 +320,20 @@
         function loadthegame() {
             gmethods.loadhanler()
         }
+
+        //social sharing
+        var social = {
+            twitter: "https://twitter.com/intent/tweet?text=myntra.com",
+            facebook: "https://www.facebook.com/sharer/sharer.php?u=myntra.com"
+        };
+        var fbbutton = document.getElementById("facebook");
+        var twitterbutton = document.getElementById("twitter");
+        fbbutton.addEventListener("click",function () {
+            window.open(social.facebook, '_blank', 'location=yes,height=570,width=520,scrollbars=yes,status=yes');
+        },false);
+        twitterbutton.addEventListener("click",function () {
+            window.open(social.twitter, '_blank', 'location=yes,height=570,width=520,scrollbars=yes,status=yes');
+        },false);
+        console.log(social);
         window.addEventListener("load",loadthegame,false);
 })()
