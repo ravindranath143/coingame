@@ -689,6 +689,28 @@ button#play {
     padding-top: 160px;
 }
 }
+@media screen and (min-device-width: 600px) and (max-device-width: 769px){
+    div#holdthedoor {
+    width: 480px;
+    margin: auto;
+}
+div#invisible-coin {
+    width: 480px;
+    margin: auto;
+}
 
+}
+@media screen and (min-device-width: 769px){
+    div#holdthedoor {
+    width: 490px;
+    margin: auto;
+    height: 700px;
+}
+div#invisible-coin {
+    width: 480px;
+    margin: auto;
+}
+
+}
 
 
