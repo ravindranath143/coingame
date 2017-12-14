@@ -262,7 +262,9 @@ ul.share-icons img {
     margin-top: 67px;
 }
 
-
+div#holdthedoor .lost-screen button#play-again {
+    margin-top: 22px;
+}
 
 
 
@@ -612,7 +614,11 @@ button#play-again {
 div#holdthedoor .lost-screen button#play-again {
     margin-top: 12px;
 }
-div#holdthedoor .sreen-text {
+
+div#holdthedoor .lost-screen .sreen-text {
+    padding-top: 112px;
+}
+div#holdthedoor .win-screen .sreen-text {
     padding-top: 194px;
 }
 div#holdthedoor .win-screen h3 {

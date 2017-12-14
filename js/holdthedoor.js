@@ -8,10 +8,33 @@
         starttimeout,
         timertimeout,
         is_loop = 1,
+        decTimer = 30,
         barwidth = 10,
         bartimecout,
         gamescreen,
+        timer_count,
         initial_score = 0;
+        var countDownDate = 120000;
+var x = setInterval(function() {
+    countDownDate = countDownDate - 1000;
+    var minutes = Math.floor((countDownDate % (1000 *60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((countDownDate % (1000 * 60)) / 1000);
+    timer_count = minutes + " : " + seconds;
+
+    if (countDownDate <= 0) {
+        game.stopgame();
+        clearInterval(x);
+        setTimeout(game.losescreen, 300);
+       
+    }
+}, 1000);
+var decIntervel = setInterval(function(){
+        decTimer = decTimer -3;
+        if(decTimer <=0){
+            decTimer = 5;
+        }
+
+},1000);
     var Door = {};
     var canvas = document.getElementById('doorClose');
     var ctx = canvas.getContext("2d");
@@ -54,12 +77,12 @@
         ctx.drawImage(game.gameImages[5], 0, 0, 980, 1300, Door.z, Door.y, 490, 650);
         ctx.drawImage(game.gameImages[2], 0, 0, 980, 1300, 0, 0, 490, 650);
         ctx.drawImage(game.gameImages[1], 0, 0, 980, 1300, 0, 0, 490, 650);
-        ctx.drawImage(game.gameImages[0], 0, 0, 821, 313, 200, 0, 100, 50);
+        ctx.drawImage(game.gameImages[0], 0, 0, 360, 73, 200, 0, 120, 50);
         ctx.fillStyle = "#000";
         ctx.font = "24px Helvetica";
         ctx.textAlign = "left";
         ctx.textBaseline = "top";
-        ctx.fillText(game_time, 240, 10);
+        ctx.fillText(timer_count, 230, 10);
         if (Door.x < 0) {
             Door.x = Door.x - .2;
             Door.z = Door.z + .2;
@@ -76,7 +99,8 @@
             setTimeout(game.losescreen, 300);
         }
         if (is_loop) {
-            starttimeout = setTimeout(game.loopthegame, 15);
+            console.log(decTimer);
+            starttimeout = setTimeout(game.loopthegame, decTimer);
         }
     }
     creategame.prototype.stopgame = function() {
@@ -96,7 +120,8 @@
         Door.x = -80;
         Door.z = 80;
         Door.y = 1;
-        game_time = 60;
+        decTimer = 30,
+        countDownDate = 120000;
         is_loop = 1;
         document.addEventListener("click", game.closethedoor, false);
         game.loopthegame();
@@ -163,7 +188,7 @@
         losescreen = document.getElementById('lose_screen');
         playbutton = document.getElementsByClassName('play');
         gamescreen.style.display = 'none';
-        game.downloadimageque("timer", "img/timer.png");
+        game.downloadimageque("timer", "img/timer.jpg");
         game.downloadimageque("button", "img/button.png");
         game.downloadimageque("frame", "img/door-side.png");
         game.downloadimageque("crowd", "img/crowded.png");
