@@ -14,7 +14,7 @@
         gamescreen,
         timer_count,
         initial_score = 0;
-        var countDownDate = 120000;
+        var countDownDate = 60000;
 var x = setInterval(function() {
     countDownDate = countDownDate - 1000;
     var minutes = Math.floor((countDownDate % (1000 *60 * 60)) / (1000 * 60));
@@ -100,7 +100,7 @@ var decIntervel = setInterval(function(){
         }
         if (is_loop) {
             console.log(decTimer);
-            starttimeout = setTimeout(game.loopthegame, decTimer);
+            starttimeout = setTimeout(game.loopthegame, 30);
         }
     }
     creategame.prototype.stopgame = function() {
@@ -121,7 +121,7 @@ var decIntervel = setInterval(function(){
         Door.z = 80;
         Door.y = 1;
         decTimer = 30,
-        countDownDate = 120000;
+        countDownDate = 60000;
         is_loop = 1;
         document.addEventListener("click", game.closethedoor, false);
         game.loopthegame();
@@ -150,7 +150,7 @@ var decIntervel = setInterval(function(){
             Door.x = 0;
             Door.z = 0;
             game.stopgame();
-            initial_score = ((game_time/60)*100).toFixed();
+            initial_score = 500;
             document.getElementById("win_score").innerHTML = initial_score;
             console.log(initial_score);
             setTimeout(game.winscreen, 300);

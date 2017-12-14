@@ -96,11 +96,12 @@ div#holdthedoor .sreen-text {
 }
 div#holdthedoor .win-screen h3 {
     font-size: 18px;
+    margin-top: 5px;
    
 }
 div#holdthedoor .win-screen h1 {
-    margin-top: -19px;
-    margin-bottom: 8px;
+    margin-top: -13px;
+    margin-bottom: 0px;
 }
 div#holdthedoor ul.share-icons {
     margin-top: 7px;
@@ -232,9 +233,13 @@ button#play-again {
     padding-top: 87px;
 }
 .win-screen img.myntra-coins {
-    width: 70px;
+    width: 40px;
     margin-top: 0px;
-    margin-bottom: 12px;
+    margin-bottom: 0;
+}
+div#holdthedoor .win-screen p {
+    margin: 1px;
+    color: #762746;
 }
 hr.line-width {
     width: 120px;
@@ -268,8 +273,11 @@ div#holdthedoor .lost-screen button#play-again {
 span.bigger-sizes {
     font-size: 33px;
 }
-
-
+div#holdthedoor div#catchwer {
+    background: url(../img/htd-game.png);
+    height: -webkit-fill-available;
+    background: #440e28;
+}
 
 @media screen and (min-device-width: 250px) and (max-device-width: 768px){
     .displayScreen {
@@ -350,10 +358,22 @@ button#play {
 
 
 
+
+
 @media screen and (max-device-width: 321px){
     .intro-text {
     padding-top: 104px;
 
+}
+div#invisible-coin .win-screen h3 {
+    font-size: 13px;
+    padding-top: 40px;
+}
+div#invisible-coin .win-screen button#play-again {
+    background-size: 121px;
+    width: 116px;
+    height: 56px;
+    margin-top: 15px;
 }
 div#holdthedoor .lost-screen .sreen-text h3 {
     padding-top: 0;
@@ -450,7 +470,9 @@ div#invisible-coin .win-screen img.myntra-coins {
 }
 
 
+@media screen and (min-device-width: 321px) and (max-device-width:359px){
 
+}
 
 
 
@@ -689,6 +711,14 @@ button#play {
 }
 
 }
+
+@media screen and (min-device-width: 400px) and (max-device-width: 425px){
+    div#holdthedoor .win-screen .sreen-text {
+    padding-top: 183px;
+}
+}
+
+
 @media screen and (min-device-width: 426px) and (max-device-width: 769px){
     .start-screen {
     height: -webkit-fill-available;
@@ -722,10 +752,7 @@ div#invisible-coin {
     margin: auto;
     height: 700px;
 }
-div#invisible-coin {
-    width: 480px;
-    margin: auto;
-}
+
 
 }
 
