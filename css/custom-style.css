@@ -63,21 +63,21 @@ div#invisible-coin .start-screen{
     position: relative;
 }
 div#holdthedoor .lost-screen{
-    background: url(../img/htd-lose.png) no-repeat #2c242a;
+    background: url(../img/htd-lose.png) no-repeat #515151;
     background-size: 100%;
     height: -webkit-fill-available;
     background-position: 50% 0%;
     position: relative;
 } 
 div#holdthedoor .start-screen{
-    background: url(../img/htd-coach.png) no-repeat #2c242a;
+    background: url(../img/htd-coach.png) no-repeat #190a11;
     background-size: 100%;
     height: -webkit-fill-available;
     background-position: 50% 0%;
     position: relative;
 } 
 div#holdthedoor .win-screen{
-    background: url(../img/htd-win.png) no-repeat #2c242a;
+    background:url(../img/htd-win.png) no-repeat #762a49;
     background-size: 100%;
     height: -webkit-fill-available;
     background-position: 50% 0%;
